@@ -1,0 +1,124 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Users\\Володимир\\AppData\\Local\\.meteor\\packages\\meteor-tool\\1.4.2_3\\mt-os.windows.x86_32\\dev_bundle\\bin\\node.exe',
+1 verbose cli   'C:\\Users\\Володимир\\AppData\\Local\\.meteor\\packages\\meteor-tool\\1.4.2_3\\mt-os.windows.x86_32\\dev_bundle\\lib\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '—save',
+1 verbose cli   'react',
+1 verbose cli   'react-dom' ]
+2 info using npm@3.10.9
+3 info using node@v4.6.2
+4 error arg Argument starts with non-ascii dash, this is probably invalid: [ '—save', 'react', 'react-dom' ]
+5 silly loadCurrentTree Starting
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 silly fetchPackageMetaData —save
+9 silly fetchPackageMetaData react
+10 silly fetchPackageMetaData react-dom
+11 silly fetchOtherPackageData —save
+12 silly cache add args [ '—save', null ]
+13 verbose cache add spec —save
+14 silly fetchNamedPackageData react
+15 silly mapToRegistry name react
+16 silly mapToRegistry using default registry
+17 silly mapToRegistry registry https://registry.npmjs.org/
+18 silly mapToRegistry data Result {
+18 silly mapToRegistry   raw: 'react',
+18 silly mapToRegistry   scope: null,
+18 silly mapToRegistry   escapedName: 'react',
+18 silly mapToRegistry   name: 'react',
+18 silly mapToRegistry   rawSpec: '',
+18 silly mapToRegistry   spec: 'latest',
+18 silly mapToRegistry   type: 'tag' }
+19 silly mapToRegistry uri https://registry.npmjs.org/react
+20 silly fetchNamedPackageData react-dom
+21 silly mapToRegistry name react-dom
+22 silly mapToRegistry using default registry
+23 silly mapToRegistry registry https://registry.npmjs.org/
+24 silly mapToRegistry data Result {
+24 silly mapToRegistry   raw: 'react-dom',
+24 silly mapToRegistry   scope: null,
+24 silly mapToRegistry   escapedName: 'react-dom',
+24 silly mapToRegistry   name: 'react-dom',
+24 silly mapToRegistry   rawSpec: '',
+24 silly mapToRegistry   spec: 'latest',
+24 silly mapToRegistry   type: 'tag' }
+25 silly mapToRegistry uri https://registry.npmjs.org/react-dom
+26 silly cache add parsed spec Result {
+26 silly cache add   raw: '—save',
+26 silly cache add   scope: null,
+26 silly cache add   escapedName: null,
+26 silly cache add   name: null,
+26 silly cache add   rawSpec: '—save',
+26 silly cache add   spec: 'D:\\Documents\\labaratory\\Meteor\\PizzaDay\\PizzaDay\\—save',
+26 silly cache add   type: 'local' }
+27 verbose request uri https://registry.npmjs.org/react
+28 verbose request no auth needed
+29 info attempt registry request try #1 at 14:02:53
+30 verbose request id 613470352bf2e254
+31 http request GET https://registry.npmjs.org/react
+32 info retry will retry, error on last attempt: TypeError: The header content contains invalid characters
+33 verbose request uri https://registry.npmjs.org/react-dom
+34 verbose request no auth needed
+35 info attempt registry request try #1 at 14:02:53
+36 http request GET https://registry.npmjs.org/react-dom
+37 error addLocal Could not install D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay\—save
+38 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open 'D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay\—save'
+38 silly fetchPackageMetaData     at Error (native)
+38 silly fetchPackageMetaData  error for —save { [Error: ENOENT: no such file or directory, open 'D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay\—save']
+38 silly fetchPackageMetaData   errno: -4058,
+38 silly fetchPackageMetaData   code: 'ENOENT',
+38 silly fetchPackageMetaData   syscall: 'open',
+38 silly fetchPackageMetaData   path: 'D:\\Documents\\labaratory\\Meteor\\PizzaDay\\PizzaDay\\—save' }
+39 info retry will retry, error on last attempt: TypeError: The header content contains invalid characters
+40 info attempt registry request try #2 at 14:03:03
+41 http request GET https://registry.npmjs.org/react
+42 info retry will retry, error on last attempt: TypeError: The header content contains invalid characters
+43 info attempt registry request try #2 at 14:03:03
+44 http request GET https://registry.npmjs.org/react-dom
+45 info retry will retry, error on last attempt: TypeError: The header content contains invalid characters
+46 info attempt registry request try #3 at 14:04:03
+47 http request GET https://registry.npmjs.org/react
+48 silly fetchPackageMetaData TypeError: The header content contains invalid characters
+48 silly fetchPackageMetaData     at ClientRequest.OutgoingMessage.setHeader (_http_outgoing.js:351:13)
+48 silly fetchPackageMetaData     at new ClientRequest (_http_client.js:79:14)
+48 silly fetchPackageMetaData     at Object.exports.request (http.js:31:10)
+48 silly fetchPackageMetaData     at Object.socket.once.exports.request (https.js:182:15)
+48 silly fetchPackageMetaData     at Request.start (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:740:32)
+48 silly fetchPackageMetaData     at Request.end (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:1398:10)
+48 silly fetchPackageMetaData     at end (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:567:14)
+48 silly fetchPackageMetaData     at Immediate._onImmediate (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:581:7)
+48 silly fetchPackageMetaData     at processImmediate [as _immediateCallback] (timers.js:383:17)
+48 silly fetchPackageMetaData  error for react [TypeError: The header content contains invalid characters]
+49 info attempt registry request try #3 at 14:04:03
+50 http request GET https://registry.npmjs.org/react-dom
+51 silly fetchPackageMetaData TypeError: The header content contains invalid characters
+51 silly fetchPackageMetaData     at ClientRequest.OutgoingMessage.setHeader (_http_outgoing.js:351:13)
+51 silly fetchPackageMetaData     at new ClientRequest (_http_client.js:79:14)
+51 silly fetchPackageMetaData     at Object.exports.request (http.js:31:10)
+51 silly fetchPackageMetaData     at Object.socket.once.exports.request (https.js:182:15)
+51 silly fetchPackageMetaData     at Request.start (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:740:32)
+51 silly fetchPackageMetaData     at Request.end (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:1398:10)
+51 silly fetchPackageMetaData     at end (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:567:14)
+51 silly fetchPackageMetaData     at Immediate._onImmediate (C:\Users\Володимир\AppData\Local\.meteor\packages\meteor-tool\1.4.2_3\mt-os.windows.x86_32\dev_bundle\lib\node_modules\npm\node_modules\request\request.js:581:7)
+51 silly fetchPackageMetaData     at processImmediate [as _immediateCallback] (timers.js:383:17)
+51 silly fetchPackageMetaData  error for react-dom [TypeError: The header content contains invalid characters]
+52 silly rollbackFailedOptional Starting
+53 silly rollbackFailedOptional Finishing
+54 silly runTopLevelLifecycles Finishing
+55 silly install printInstalled
+56 verbose stack Error: ENOENT: no such file or directory, open 'D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay\—save'
+56 verbose stack     at Error (native)
+57 verbose cwd D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay
+58 error Windows_NT 6.3.9600
+59 error argv "C:\\Users\\Володимир\\AppData\\Local\\.meteor\\packages\\meteor-tool\\1.4.2_3\\mt-os.windows.x86_32\\dev_bundle\\bin\\node.exe" "C:\\Users\\Володимир\\AppData\\Local\\.meteor\\packages\\meteor-tool\\1.4.2_3\\mt-os.windows.x86_32\\dev_bundle\\lib\\node_modules\\npm\\bin\\npm-cli.js" "install" "—save" "react" "react-dom"
+60 error node v4.6.2
+61 error npm  v3.10.9
+62 error path D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay\—save
+63 error code ENOENT
+64 error errno -4058
+65 error syscall open
+66 error enoent ENOENT: no such file or directory, open 'D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay\—save'
+67 error enoent ENOENT: no such file or directory, open 'D:\Documents\labaratory\Meteor\PizzaDay\PizzaDay\—save'
+67 error enoent This is most likely not a problem with npm itself
+67 error enoent and is related to npm not being able to find a file.
+68 verbose exit [ -4058, true ]
