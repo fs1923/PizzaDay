@@ -13,6 +13,8 @@ caching-compiler@1.1.9
 caching-html-compiler@1.1.0
 callback-hook@1.0.10
 check@1.2.4
+coffeescript@1.0.17
+cosmos:browserify@0.4.0
 ddp@1.2.5
 ddp-client@1.2.9
 ddp-common@1.2.8
@@ -65,8 +67,12 @@ templating-compiler@1.3.0
 templating-runtime@1.3.0
 templating-tools@1.1.0
 tracker@1.1.1
+twbs:bootstrap@3.3.6
 ui@1.0.12
 underscore@1.0.10
+universe:modules@0.1.0
+universe:react-bootstrap@0.23.7
+unofficial:babel-compiler@5.4.7
 url@1.0.11
 webapp@1.3.12
 webapp-hashing@1.0.9
