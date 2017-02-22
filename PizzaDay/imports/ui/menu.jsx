@@ -1,37 +1,36 @@
 import React, { Component } from 'react';
-import {Nav,Navbar,NavItem,NavDropdown,MenuItem,Button} from 'react-bootstrap';
-import NavbarHeader from 'react-bootstrap/lib/NavbarHeader';
-import NavbarCollapse from 'react-bootstrap/lib/NavbarCollapse';
-import NavbarToggle from 'react-bootstrap/lib/NavbarToggle';
-import NavbarBrand from 'react-bootstrap/lib/NavbarBrand';
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import '../startup/accounts-config.jsx';
 
 
-export default class Menu extends Component{
-    render(){
+export default class Menu extends Component {
+    render() {
+
+
         return (
-            //<div>as</div>
             <div>
-            <Navbar inverse collapseOnSelect>
-                <NavbarHeader>
-                    <NavbarBrand>
-                        <a href="#">Pizza Day</a>
-                    </NavbarBrand>
-                    <NavbarToggle />
-                </NavbarHeader>
-                <NavbarCollapse>
-                    <Nav>
-                        <NavItem eventKey={1} href="#">Main</NavItem>
-                        <NavItem eventKey={2} href="#">My Event</NavItem>
-                    </Nav>
-                    <Nav pullRight>
-                        <NavItem eventKey={2} href="#">Login/Logout</NavItem>
-                    </Nav>
-                </NavbarCollapse>
-            </Navbar>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href="#">Pizza Day</a>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav>
+                            <NavItem eventKey={1} href="#">Main</NavItem>
+                            <NavItem eventKey={2} href="#">My Event</NavItem>
+                        </Nav>
+                        <Nav pullRight>
+                            <NavDropdown eventKey={3} title="Login/Logout" id="basic-nav-dropdown">
+                                <MenuItem eventKey={3.1} header ><Accounts.ui.LoginForm /></MenuItem>
+                            </NavDropdown>
+
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+
             </div>
-            //<div>
-            //    <Button bsStyle="primary">Primary</Button>
-            //</div>
         );
     }
 }
