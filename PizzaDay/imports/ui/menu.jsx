@@ -12,14 +12,14 @@ export default class Menu extends Component {
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="#">Pizza Day</a>
+                            <a href="/">Pizza Day</a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav>
-                            <NavItem eventKey={1} href="#">Main</NavItem>
-                            <NavItem eventKey={2} href="#">My Event</NavItem>
+                            <NavItem eventKey={1} href="/">Main</NavItem>
+                            <NavItem eventKey={2} href="/myEvents">My Event</NavItem>
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown eventKey={3} title="Login/Logout" id="basic-nav-dropdown">

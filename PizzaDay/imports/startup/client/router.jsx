@@ -2,7 +2,8 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, Link, browserHistory, IndexRoute} from 'react-router'
 
-import Menu from '../../ui/menu.jsx'
+import Menu from '../../ui/menu.jsx';
+import Main from '../../ui/Main.jsx'
 
 const Layout =  (props)=>{
     return (
@@ -36,13 +37,12 @@ class NotFound extends React.Component {
         )
     }
 }
-console.log(document.getElementById('app'))
 Meteor.startup(()=>
 {
     render((
         <Router history={browserHistory}>
             <Route path="/" component={Layout}>
-                <IndexRoute component={Users}/>
+                <IndexRoute component={Main}/>
                 <Route path="users" component={Users}/>
                 <Route path="*" component={NotFound}/>
             </Route>
