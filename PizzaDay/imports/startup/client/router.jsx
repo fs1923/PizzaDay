@@ -1,9 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Link, browserHistory, IndexRoute} from 'react-router'
+import { Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
 
 import Menu from '../../ui/menu.jsx';
-import Main from '../../ui/Main.jsx'
+import Main from '../../ui/Main.jsx';
 
 const Layout =  (props)=>{
     return (
@@ -28,21 +28,26 @@ export default class Users extends React.Component {
         )
     }
 }
-class NotFound extends React.Component {
-    render() {
+const NotFound = ()=>{
         return (
-            <div>
-                Page not found
+            <div className="container">
+                <div className="error">
+                    <h1><b>Page not found</b></h1>
+                    <span className="glyphicon glyphicon-remove-circle" ></span>
+                </div>
             </div>
         )
-    }
+ }
+ const waitSubsc = () => {
+    return  Meteor.subscribe('groups');
 }
 Meteor.startup(()=>
 {
     render((
+
         <Router history={browserHistory}>
-            <Route path="/" component={Layout}>
-                <IndexRoute component={Main}/>
+            <Route  path="/" component={Layout}>
+                <IndexRoute waitOn={waitSubsc} component={Main}/>
                 <Route path="users" component={Users}/>
                 <Route path="*" component={NotFound}/>
             </Route>

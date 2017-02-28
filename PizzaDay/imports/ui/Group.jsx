@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Panel } from 'react-bootstrap';
 
+
 export default class Group extends Component{
     render(){
         return (
