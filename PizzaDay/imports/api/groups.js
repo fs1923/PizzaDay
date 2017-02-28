@@ -8,3 +8,9 @@ if (Meteor.isServer) {
         return Groups.find();
     });
 }
+Meteor.methods({
+    'Groups.remove'(groupId, userId) {
+
+        Groups.remove({_id: groupId});
+    },
+});
