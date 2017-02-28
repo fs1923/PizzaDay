@@ -10,9 +10,10 @@ class Group extends Component{
     render(){
         return (
                 <Panel header={this.props.group.name} eventKey="1"> <span>Main User:  </span>
-                {this.props.group.mainUser}{this.props.currentUser ? <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
-                        &times;
-                    </button> : ''}</Panel>
+                {this.props.group.mainUser}
+                    {this.props.currentUser ? <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
+                            &times;
+                        </button> : ''}</Panel>
         );
     }
 }

@@ -10,7 +10,9 @@ if (Meteor.isServer) {
 }
 Meteor.methods({
     'Groups.remove'(groupId, userId) {
+        if (this.userId) {
+            Groups.remove({_id: groupId});
+        }
 
-        Groups.remove({_id: groupId});
     },
 });
