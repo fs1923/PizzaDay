@@ -13,6 +13,9 @@ class Main extends Component{
         ));
     }
     render(){
+        //if (this.props.loading) {
+        //    return 'Loading';
+        //}
         return(
             <div className="container">
                 <h1>Group LIST</h1>
@@ -27,9 +30,10 @@ Main.propTypes = {
     groups: PropTypes.array.isRequired,
 };
 export default createContainer(() => {
+    //const groupsSubs = Meteor.subscribe('groups');
     Meteor.subscribe('groups');
-
     return {
+        //loading: !groupsSubs.ready(),
         groups: Groups.find({}).fetch(),
     };
 }, Main);

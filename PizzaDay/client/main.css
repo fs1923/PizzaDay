@@ -17,4 +17,13 @@
     font-size: 115px;
     color: #929292;
     opacity: 0.5;
+.delete {
+    float: right;
+    font-weight: bold;
+    background: #f5f5f5;
+    font-size: 18px;
+    border: none;
+    position: relative;
+    color: darkred;
+    border-radius: 13px;
 }
