@@ -1,7 +1,4 @@
 .navbar{
-    display:block;
-}
-.navbar{
     border-radius: 0px;
 }
 .error{
@@ -26,4 +23,32 @@
     position: relative;
     color: darkred;
     border-radius: 13px;
+}
+.inputName:focus {
+    border: 2px solid #e65a25;
+}
+.form-group-lg .form-control  {
+    border-radius: 0px;
+    padding-top: 45px;
+    padding-bottom: 20px;
+    position: relative;
+}
+.formButton {
+    border-radius: 0px;
+    padding: 20px 45px 20px 45px;
+    background: #e65a25;
+    color: #fff;
+    font-size: 20px;
+    border: 1px solid #e65a25;
+}
+.formButton:hover {
+    background: #E64F1A;
+    color: whitesmoke;
+}
+.label-form-insert {
+    position: absolute;
+    left: 26px;
+    top: 7px;
+    color: #333;
+    z-index: 2;
 }
