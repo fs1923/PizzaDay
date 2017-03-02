@@ -12,7 +12,7 @@ class Group extends Component{
     render(){
         return (
                 <Panel header={this.props.group.name} eventKey="1"> <span>Main User:  </span>
-                {this.props.group.mainUser}
+                {Meteor.users.findOne({_id:this.props.group.mainUser}).username}
                     {this.props.currentUser ? <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
                             &times;
                         </button> : ''}</Panel>
