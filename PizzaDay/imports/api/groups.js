@@ -17,5 +17,10 @@ Meteor.methods({
         }
 
     },
+    'Groups.insert'(groupInsert) {
+        if (this.userId) {
+            Groups.insert(groupInsert);
+        }
+    },
 });
 

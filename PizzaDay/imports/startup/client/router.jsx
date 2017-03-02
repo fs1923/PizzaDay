@@ -1,32 +1,15 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
+import Main from '../../ui/Main.jsx';
+import InsertGroup from '../../ui/InsertGroup.jsx';
 
 import Menu from '../../ui/menu.jsx';
-import Main from '../../ui/Main.jsx';
 
 const Layout =  (props)=>{
     return (
        <div><Menu />{props.children}</div>
     )
-}
-
-
-
-export default class Users extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>Users</h1>
-                <div className="master">
-                    sadfa
-                </div>
-                <div className="detail">
-                    asdf
-                </div>
-            </div>
-        )
-    }
 }
 const NotFound = ()=>{
         return (
@@ -38,17 +21,15 @@ const NotFound = ()=>{
             </div>
         )
  }
- const waitSubsc = () => {
-    return  Meteor.subscribe('groups');
-}
+
 Meteor.startup(()=>
 {
     render((
 
         <Router history={browserHistory}>
             <Route  path="/" component={Layout}>
-                <IndexRoute waitOn={waitSubsc} component={Main}/>
-                <Route path="users" component={Users}/>
+                <IndexRoute component={Main}/>
+                <Route path="addGroup" component={InsertGroup}/>
                 <Route path="*" component={NotFound}/>
             </Route>
 

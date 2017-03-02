@@ -18,6 +18,7 @@ class Main extends Component{
         //}
         return(
             <div className="container">
+                <a className="btn btn-success" href="/addGroup">Create group</a>
                 <h1>Group LIST</h1>
                 <PanelGroup>
                     {this.renderGroup()}
