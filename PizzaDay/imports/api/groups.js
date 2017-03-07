@@ -22,5 +22,10 @@ Meteor.methods({
             Groups.insert(groupInsert);
         }
     },
+    'Groups.update'(groupUpdate) {
+        if (this.userId) {
+            Groups.update({_id:groupUpdate._id},groupUpdate);
+        }
+    }
 });
 
