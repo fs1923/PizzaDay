@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-
+import { UserList } from '../api/userList.js';
 
 export const Groups = new Mongo.Collection('Groups');
 
@@ -26,6 +26,9 @@ Meteor.methods({
         if (this.userId) {
             Groups.update({_id:groupUpdate._id},groupUpdate);
         }
-    }
+    },
+    'User.insert'(userListInsert) {
+        UserList.insert(userListInsert);
+    },
 });
 
