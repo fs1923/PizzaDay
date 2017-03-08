@@ -5,6 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
+import Spinner from './Spinner'
 
 
 class updateGroups extends Component {
@@ -21,7 +22,7 @@ class updateGroups extends Component {
     }
     render() {
         if (this.props.loading) {
-            return <span>'Loading'</span>;
+            return <Spinner/>;
         }
         return (
             <div className="container">

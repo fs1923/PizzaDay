@@ -14,9 +14,12 @@ class Group extends Component{
         userListInsert = {UserId: this.props.currentUser._id, groupId: this.props.group._id}
         Meteor.call( 'User.insert', userListInsert );
     };
+    renderLinkName(){
+        return <Link to={`/group/${this.props.group._id}`}>{this.props.group.name}</Link>
+    }
     render(){
         return (
-                <Panel header={this.props.group.name} eventKey="1"> <span>Main User:  </span>
+                <Panel header={this.renderLinkName()} eventKey="1"> <span>Main User:  </span>
                 {Meteor.users.findOne({_id:this.props.group.mainUser}).username}
                     { this.props.currentUser ?
                      <div className="right-menu">

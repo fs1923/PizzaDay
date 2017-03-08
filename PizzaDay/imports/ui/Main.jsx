@@ -4,6 +4,8 @@ import { Groups } from '../api/groups.js';
 import { Meteor } from 'meteor/meteor';
 import { PanelGroup } from 'react-bootstrap';
 import Group from './Group.jsx';
+import Spiner from './Spinner'
+import { Link } from 'react-router';
 
 class Main extends Component{
 
@@ -14,13 +16,11 @@ class Main extends Component{
     }
     render(){
         if (this.props.loading) {
-            return <div className="main">
-                <div className="round1"></div>
-            </div>;
+            return <Spiner/>;
         }
         return(
             <div className="container">
-                <a className="btn btn-success" href="/addGroup">Create group</a>
+                <Link className="btn btn-success" to="/addGroup">Create group</Link>
                 <h1>Group LIST</h1>
                 <PanelGroup>
                     {this.renderGroup()}

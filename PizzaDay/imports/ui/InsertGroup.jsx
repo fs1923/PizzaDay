@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
+import { browserHistory } from 'react-router';
 
 export default class InsertGroup extends Component {
     insertGroup(event) {
@@ -8,7 +9,10 @@ export default class InsertGroup extends Component {
 
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
         groupInstert = {name:name,mainUser:Meteor.user()._id}
-        Meteor.call('Groups.insert', groupInstert );
+        Meteor.call('Groups.insert', groupInstert , (err, result) => {
+            if (err) throw err;
+            browserHistory.push('/');
+        });
     }
     render() {
         return (
