@@ -13,9 +13,11 @@ class Main extends Component{
         ));
     }
     render(){
-        //if (this.props.loading) {
-        //    return 'Loading';
-        //}
+        if (this.props.loading) {
+            return <div className="main">
+                <div className="round1"></div>
+            </div>;
+        }
         return(
             <div className="container">
                 <a className="btn btn-success" href="/addGroup">Create group</a>
@@ -31,10 +33,10 @@ Main.propTypes = {
     groups: PropTypes.array.isRequired,
 };
 export default createContainer(() => {
-    //const groupsSubs = Meteor.subscribe('groups');
-    Meteor.subscribe('groups');
+    const groupsSubs = Meteor.subscribe('groups');
+
     return {
-        //loading: !groupsSubs.ready(),
+        loading: !groupsSubs.ready(),
         groups: Groups.find({}).fetch(),
     };
 }, Main);
