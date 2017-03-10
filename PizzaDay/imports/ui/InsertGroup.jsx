@@ -17,7 +17,7 @@ export default class InsertGroup extends Component {
     render() {
         return (
             <div className="container">
-                <h1>Update Group</h1>
+                <h1>Add Group</h1>
                 <div className="col-md-5">
                     <form>
                             <FormGroup bsSize="large">

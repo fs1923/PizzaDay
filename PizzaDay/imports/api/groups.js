@@ -27,8 +27,11 @@ Meteor.methods({
             Groups.update({_id:groupUpdate._id},groupUpdate);
         }
     },
-    'User.insert'(userListInsert) {
+    'UserList.insert'(userListInsert) {
         UserList.insert(userListInsert);
+    },
+    'UserList.remove'(requestId){
+        UserList.remove({_id: requestId});
     },
 });
 
