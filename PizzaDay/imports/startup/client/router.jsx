@@ -4,6 +4,7 @@ import { Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
 import Main from '../../ui/Main.jsx';
 import InsertGroup from '../../ui/InsertGroup.jsx';
 import updateGroup from '../../ui/updateGroups';
+import GroupPage from '../../ui/GroupPage.jsx';
 
 import Menu from '../../ui/menu.jsx';
 
@@ -31,6 +32,7 @@ Meteor.startup(()=>
             <Route  path="/" component={Layout}>
                 <IndexRoute component={Main}/>
                 <Route path="addGroup" component={InsertGroup}/>
+                <Route path="/group/:groupId" component={GroupPage}/>
                 <Route path="updateGroup/:groupId" component={updateGroup}/>
                 <Route path="*" component={NotFound}/>
             </Route>

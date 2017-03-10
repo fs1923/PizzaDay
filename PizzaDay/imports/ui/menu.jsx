@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import '../startup/accounts-config.jsx';
+import { Link } from 'react-router';
 
 
 export default class Menu extends Component {
@@ -12,14 +13,14 @@ export default class Menu extends Component {
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="/">Pizza Day</a>
+                            <Link to="/">Pizza Day</Link>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav>
-                            <NavItem eventKey={1} href="/">Main</NavItem>
-                            <NavItem eventKey={2} href="/myEvents">My Event</NavItem>
+                            <NavItem eventKey={1}><Link to="/">Main</Link></NavItem>
+                            <NavItem eventKey={2}><Link to="/myEvents">My Event</Link></NavItem>
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown eventKey={3} title="Login/Logout" id="basic-nav-dropdown">
