@@ -7,6 +7,7 @@ import Group from './Group.jsx';
 import Spiner from './Spinner'
 import { Link } from 'react-router';
 
+
 class Main extends Component{
 
     renderGroup(){
@@ -19,8 +20,8 @@ class Main extends Component{
             return <Spiner/>;
         }
         return(
-            <div className="container">
-                <Link className="btn btn-success" to="/addGroup">Create group</Link>
+             <div className="container">
+                 { this.props.currentUser ? <Link className="btn btn-success" to="/addGroup">Create group</Link> : '' }
                 <h1>Group LIST</h1>
                 <PanelGroup>
                     {this.renderGroup()}
@@ -34,9 +35,11 @@ Main.propTypes = {
 };
 export default createContainer(() => {
     const groupsSubs = Meteor.subscribe('groups');
+    Meteor.subscribe('users');
 
     return {
         loading: !groupsSubs.ready(),
         groups: Groups.find({}).fetch(),
+        currentUser: Meteor.user(),
     };
 }, Main);

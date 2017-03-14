@@ -8,6 +8,9 @@ if (Meteor.isServer) {
     Meteor.publish('groups', function groupsPublication() {
         return Groups.find();
     });
+    Meteor.publish('users', function usersPublication() {
+        return Meteor.users.find({},{fields:{'username':1}});
+    });
 }
 
 Meteor.methods({

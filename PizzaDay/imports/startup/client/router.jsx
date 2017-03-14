@@ -5,7 +5,7 @@ import Main from '../../ui/Main.jsx';
 import InsertGroup from '../../ui/InsertGroup.jsx';
 import updateGroup from '../../ui/updateGroups';
 import GroupPage from '../../ui/GroupPage.jsx';
-
+import requestUser from '../../ui/RequestUser.jsx';
 import Menu from '../../ui/menu.jsx';
 
 const Layout =  (props)=>{
@@ -34,6 +34,7 @@ Meteor.startup(()=>
                 <Route path="addGroup" component={InsertGroup}/>
                 <Route path="/group/:groupId" component={GroupPage}/>
                 <Route path="updateGroup/:groupId" component={updateGroup}/>
+                <Route path="requestUser" component={requestUser}/>
                 <Route path="*" component={NotFound}/>
             </Route>
 
