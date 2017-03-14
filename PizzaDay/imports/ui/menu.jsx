@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import '../startup/accounts-config.jsx';
 import { Link } from 'react-router';
+import { createContainer } from 'meteor/react-meteor-data';
 
 
-export default class Menu extends Component {
+class Menu extends Component {
     render() {
 
 
@@ -23,7 +24,7 @@ export default class Menu extends Component {
                             <NavItem eventKey={2}><Link to="/myEvents">My Event</Link></NavItem>
                         </Nav>
                         <Nav pullRight>
-                            <NavDropdown eventKey={3} title="Login/Logout" id="basic-nav-dropdown">
+                            <NavDropdown eventKey={3} title={this.props.currentUser ? Meteor.user().username : "Login/Registr"} id="basic-nav-dropdown">
                                 <MenuItem eventKey={3.1} header ><Accounts.ui.LoginForm /></MenuItem>
                             </NavDropdown>
 
@@ -35,3 +36,8 @@ export default class Menu extends Component {
         );
     }
 }
+export default createContainer(() => {
+   return {
+       currentUser: Meteor.user(),
+   };
+},Menu);
