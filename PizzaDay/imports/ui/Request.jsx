@@ -6,14 +6,15 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 
 
+
 export default class Request extends Component{
-   /* deleteThisGroup() {
-        let beforDeleteGroups = confirm('Are you sure?');
-        if ( beforDeleteGroups === true ) {
-            Meteor.call('Groups.remove', this.props.group._id, Meteor.user() );
+    deleteRequestForMainUser() {
+        let beforRemoveRequest = confirm('Are you sure?');
+        if ( beforRemoveRequest === true ) {
+            Meteor.call('UserList.remove', this.props.request._id, Meteor.user() );
         };
     };
-    joinTheGroup(){
+/*    joinTheGroup(){
         userListInsert = {UserId: this.props.currentUser._id, groupId: this.props.group._id}
         Meteor.call( 'UserList.insert', userListInsert );
     };
@@ -26,14 +27,23 @@ export default class Request extends Component{
             Meteor.call('UserList.remove', this.props.userList._id);
         }
     };*/
-
     render(){
         return (
+
         <tr>
             <td>1</td>
-            <td>{Meteor.users.findOne({_id:this.props.request.UserId}).username}</td>
+            <td>{Meteor.users.findOne({_id:this.props.request.UserId}).username }</td>
+            <td>
+                <div className="right-menu">
+                    <Button bsStyle="link">
+                        Accept
+                    </Button>
+                    <button className="delete" onClick={this.deleteRequestForMainUser.bind(this)}>
+                        &times;
+                    </button>
+                </div>
+            </td>
         </tr>
-
         );
     }
 }

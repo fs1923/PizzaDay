@@ -5,7 +5,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router';
 import { UserList } from '../api/userList.js';
 
-
 class Group extends Component{
     deleteThisGroup() {
         let beforDeleteGroups = confirm('Are you sure?');
@@ -42,9 +41,18 @@ class Group extends Component{
                             &times;
                             </button>
                      </div> : 'Зареєструйтеся'}
-                         { this.props.currentUser ? this.props.userList ?
-                             <div className="join-button"><Button title="delete request!!!"  bsStyle="link" onClick={this.deleteRequest.bind(this)}>Your request is being processed...</Button></div>
-                             :<div className="join-button"><Button  bsStyle="link" onClick={this.joinTheGroup.bind(this)}>join the group</Button></div> : ''}
+                         { (this.props.currentUser && this.props.group.mainUser != Meteor.userId()) ? 
+                            ( this.props.userList && this.props.userList.groupId === this.props.group._id ) ?
+                             <div className="join-button">
+                                <Button title="delete request!!!"  bsStyle="link" onClick={this.deleteRequest.bind(this)}>
+                                    Your request is being processed...
+                                </Button>
+                            </div>
+                            :<div className="join-button">
+                                <Button  bsStyle="link" onClick={this.joinTheGroup.bind(this)}>
+                                    join the group
+                                </Button>
+                            </div> : ''}
                 </Panel>
         );
     }
@@ -52,12 +60,12 @@ class Group extends Component{
 
 Group.propTypes = {
     group: PropTypes.object.isRequired,
-
+    
 };
 export default createContainer(() => {
     Meteor.subscribe('userList');
     return {
         currentUser: Meteor.user(),
-        userList:UserList.findOne({UserId:Meteor.userId()}),
+        userList:UserList.findOne({UserId: Meteor.userId()}),
     };
 },Group);

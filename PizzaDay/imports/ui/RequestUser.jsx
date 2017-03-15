@@ -27,10 +27,11 @@ class RequestUser extends Component{
                     <tr>
                         <th>#</th>
                         <th>Username</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.renderRequest()}
+                        {this.renderRequest()}
                     </tbody>
                 </Table>
             </div>
@@ -40,12 +41,12 @@ class RequestUser extends Component{
 RequestUser.propTypes = {
     userList: PropTypes.array.isRequired,
 };
-export default createContainer(() => {
+export default createContainer(({params}) => {
     const requesSubs = Meteor.subscribe('userList');
-    Meteor.subscribe('users');
+    const userSubs = Meteor.subscribe('users');
 
     return {
-        loading: !requesSubs.ready(),
-        userList: UserList.find({}).fetch(),
+        loading: !requesSubs.ready() && userSubs.ready(),
+        userList: UserList.find({groupId: params.groupId}).fetch(),
     };
 }, RequestUser);
