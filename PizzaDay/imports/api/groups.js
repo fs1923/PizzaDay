@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { UserList } from '../api/userList.js';
+import { Items } from '../api/items.js'
 
 export const Groups = new Mongo.Collection('Groups');
 
@@ -33,8 +34,14 @@ Meteor.methods({
     'UserList.insert'(userListInsert) {
         UserList.insert(userListInsert);
     },
+    'Items.insert'(itemInsert) {
+        if (this.userId) {
+            Items.insert(itemInsert);
+        }
+    },
     'UserList.remove'(requestId){
         UserList.remove({_id: requestId});
     },
+
 });
 

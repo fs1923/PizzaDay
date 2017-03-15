@@ -5,6 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import Spinner from './Spinner'
+import { Link } from 'react-router';
 
 class GroupPage extends Component {
     render() {
@@ -14,6 +15,10 @@ class GroupPage extends Component {
         return (
             <div className="container">
                 <h1>{this.props.group.name}</h1>
+
+                { Meteor.user ? <Link className="btn btn-success" to={`/group/${this.props.group._id}/insertItem`}>Add item</Link> : '' }
+                <h1>Items</h1>
+
             </div>
         );
     }
