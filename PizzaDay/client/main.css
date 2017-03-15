@@ -24,6 +24,27 @@
     border-radius: 13px;
     margin: 5px;
 }
+.delete-group{
+    font-weight: bold;
+    background: #f5f5f5;
+    font-size: 18px;
+    border: none;
+    position: relative;
+    float: right;
+    top: -48px;
+    color: darkred;
+    border-radius: 13px;
+    margin: 5px;
+}
+.edit{
+    padding: 4px;
+    background: #f5f5f5;
+    position: relative;
+    float: right;
+    top: -48px;
+    border-radius: 13px;
+    margin: 5px;
+}
 .inputName:focus {
     border: 2px solid #e65a25;
 }
