@@ -25,6 +25,9 @@ class GroupPage extends Component {
                        {(this.props.groupPage.mainUser === Meteor.userId()) ? <Button bsStyle="link">{this.renderLink()}</Button> : ''}
                     </div>
                 </div>
+                <div>
+                    {(this.props.groupPage.mainUser === Meteor.userId()) ?<Link className="btn btn-success" to={`/group/${this.props.groupPage._id}/insertItem`}>Add item</Link> : '' }
+                </div>
             </div>
         );
     }
