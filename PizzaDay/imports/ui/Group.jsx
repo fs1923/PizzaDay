@@ -32,7 +32,7 @@ class Group extends Component{
 
                    {this.props.currentUser ? Meteor.users.findOne({_id:this.props.group.mainUser}).username : ''}
                     
-                    { this.props.currentUser ? <div className="right-menu">
+                    { ( this.props.group.mainUser === Meteor.userId() ) ? <div className="right-menu">
                             <Link to={`/updateGroup/${this.props.group._id}`}>
                                 <span className="glyphicon glyphicon-pencil">
                                 </span>
@@ -40,7 +40,7 @@ class Group extends Component{
                             <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
                             &times;
                             </button>
-                     </div> : 'Зареєструйтеся'}
+                     </div> : ''}
                          { (this.props.currentUser && this.props.group.mainUser != Meteor.userId()) ? 
                             ( this.props.userList && this.props.userList.groupId === this.props.group._id ) ?
                              <div className="join-button">

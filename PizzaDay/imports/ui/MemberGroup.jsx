@@ -7,20 +7,20 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 
 
-export default class Request extends Component{
-    deleteRequestForMainUser() {
-        let beforRemoveRequest = confirm('Are you sure?');
-        if ( beforRemoveRequest === true ) {
-            Meteor.call('UserList.remove', this.props.request._id );
+export default class MemberGroup extends Component{
+    removeMembers() {
+        let beforRemoveMembers = confirm('Are you sure?');
+        if ( beforRemoveMembers === true ) {
+            Meteor.call('MembersGroups.remove', this.props.memberGroup._id );
         };
     };
-    acceptUsers() {
+/*    acceptUsers() {
         let beforAcceptMembers = confirm('Are you sure?');
         if ( beforAcceptMembers === true ) {
             Meteor.call('MembersGroups.insert', this.props.request.UserId );
             Meteor.call('UserList.remove', this.props.request._id );
         };
-    };
+    };*/
 /*    joinTheGroup(){
         userListInsert = {UserId: this.props.currentUser._id, groupId: this.props.group._id}
         Meteor.call( 'UserList.insert', userListInsert );
@@ -39,14 +39,11 @@ export default class Request extends Component{
 
         <tr>
             <td>1</td>
-            <td>{Meteor.users.findOne({_id:this.props.request.UserId}).username }</td>
-            <td>{Meteor.users.findOne({_id:this.props.request.UserId}).emails[0].address }</td>
+            <td>{ Meteor.users.findOne({_id: this.props.memberGroup.user}).username }</td>
+            <td>{ Meteor.users.findOne({_id: this.props.memberGroup.user}).emails[0].address }</td>
             <td>
                 <div className="right-menu">
-                    <Button bsStyle="link" onClick={this.acceptUsers.bind(this)}>
-                        Accept
-                    </Button>
-                    <button className="delete" onClick={this.deleteRequestForMainUser.bind(this)}>
+                    <button className="delete" onClick={this.removeMembers.bind(this)} >
                         &times;
                     </button>
                 </div>
@@ -56,7 +53,7 @@ export default class Request extends Component{
     }
 }
 
-Request.propTypes = {
-    request: PropTypes.object.isRequired,
+MemberGroup.propTypes = {
+    memberGroup: PropTypes.object.isRequired,
 };
 

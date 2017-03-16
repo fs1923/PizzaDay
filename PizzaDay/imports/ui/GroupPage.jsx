@@ -9,7 +9,7 @@ import { Link } from 'react-router';
 
 class GroupPage extends Component {
     renderLink() {
-        return (<Link to={`/group/${this.props.params.groupId}/request`}>request</Link>);
+        return (<Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link>);
     };
     render() {
         if (this.props.loading) {
