@@ -11,7 +11,7 @@ import Item from '../ui/Item.jsx'
 
 class GroupPage extends Component {
     renderLink() {
-        return (<Link to={`/group/${this.props.params.groupId}/request`}>request</Link>);
+        return (<Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link>);
     };
     renderItem(){
         return this.props.items.map((item) => (
