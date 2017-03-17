@@ -4,7 +4,7 @@ import { Mongo } from 'meteor/mongo';
 export const Items = new Mongo.Collection('Items');
 
 if (Meteor.isServer) {
-    Meteor.publish('items', function groupsPublication() {
+    Meteor.publish('items', function itemsPublication() {
         return Items.find();
     });
 }

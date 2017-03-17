@@ -12,7 +12,7 @@ export default class InsertItem extends Component {
         itemInstert = {name:name,prise:prise,group:this.props.params.groupId}
         Meteor.call('Items.insert', itemInstert , (err, result) => {
             if (err) throw err;
-            browserHistory.push('/');
+            browserHistory.push('/group/'+this.props.params.groupId);
         });
     }
     render() {
