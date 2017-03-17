@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { UserList } from '../api/userList.js';
-import { Items } from '../api/items.js'
+import { Items } from '../api/items.js';
+import { MembersGroups } from './membersGroups.js';
 
 export const Groups = new Mongo.Collection('Groups');
 
@@ -10,7 +11,7 @@ if (Meteor.isServer) {
         return Groups.find();
     });
     Meteor.publish('users', function usersPublication() {
-        return Meteor.users.find({},{fields:{'username':1}});
+        return Meteor.users.find({},{fields:{'username':1, 'emails':1}});
     });
 }
 
@@ -40,6 +41,16 @@ Meteor.methods({
     'Items.insert'(itemInsert) {
         if (this.userId) {
             Items.insert(itemInsert);
+        }
+    },
+    'MembersGroups.insert'(UserId) {
+        if (this.userId) {
+            MembersGroups.insert({user: UserId});
+        }
+    },
+    'MembersGroups.remove'(membersId) {
+        if (this.userId) {
+            MembersGroups.remove({_id: membersId});
         }
     },
 });
