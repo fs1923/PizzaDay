@@ -21,7 +21,7 @@ export default class InsertItem extends Component {
                 <h1>Add Item</h1>
                 <div className="col-md-5">
                     <form>
-                        <FormGroup bsSize="large">
+                        <FormGroup className="relative" bsSize="large">
                             <ControlLabel className="label-form-insert">Name:</ControlLabel>
                             <FormControl className="inputName"
                                          type="text"
@@ -30,8 +30,8 @@ export default class InsertItem extends Component {
                                          pattern="2-[0-9]{3}-[0-9]{3}"
                             />
                         </FormGroup>
-                        <FormGroup bsSize="large">
-                            <ControlLabel >Prise:</ControlLabel>
+                        <FormGroup className="relative" bsSize="large">
+                            <ControlLabel className="label-form-insert" >Prise:</ControlLabel>
                             <FormControl className="inputName"
                                          type="text"
                                          name="prise"
