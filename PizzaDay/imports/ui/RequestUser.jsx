@@ -6,7 +6,6 @@ import { Table, Col, Tabs, Tab } from 'react-bootstrap';
 import Request from './Request.jsx';
 import Spiner from './Spinner';
 import { Link } from 'react-router';
-import { MembersGroups } from '../api/membersGroups.js';
 import MemberGroup from './MemberGroup.jsx';
 
 class RequestUser extends Component{
@@ -72,11 +71,10 @@ RequestUser.propTypes = {
 export default createContainer(({params}) => {
     const requesSubs = Meteor.subscribe('userList');
     const userSubs = Meteor.subscribe('users');
-    const membersGroupsSubs = Meteor.subscribe('membersGroups');
 
     return {
-        loading: !requesSubs.ready() && !userSubs.ready() && !membersGroupsSubs.ready(),
-        userList: UserList.find({groupId: params.groupId}).fetch(),
-        membersGroups: MembersGroups.find({}).fetch(), 
+        loading: !requesSubs.ready() && !userSubs.ready(),
+        userList: UserList.find({groupId: params.groupId, status: "Request"}).fetch(),
+        membersGroups: UserList.find({groupId: params.groupId, status: "Follow"}).fetch(),
     };
 }, RequestUser);

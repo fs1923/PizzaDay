@@ -13,7 +13,7 @@ class Group extends Component{
         };
     };
     joinTheGroup(){
-        userListInsert = {UserId: this.props.currentUser._id, groupId: this.props.group._id}
+        userListInsert = {UserId: this.props.currentUser._id, groupId: this.props.group._id, status: "Request"}
         Meteor.call( 'UserList.insert', userListInsert );
     };
     renderLinkName(){
@@ -43,12 +43,21 @@ class Group extends Component{
                     </div>
                     :
                     this.props.currentUser ?
-                        (this.props.userList && this.props.userList.groupId === this.props.group._id) ?
-                            <div className="join-button">
-                                <Button title="delete request!!!"  bsStyle="link" onClick={this.deleteRequest.bind(this)}>
+                        (this.props.userList) ?
+                            (this.props.userList.status === "Follow") ?
+                                <div className="join-button">
+                                    Subscribed
+                                    <Button title="delete request!!!"  bsStyle="link" onClick={this.deleteRequest.bind(this)}>
+                                        Unsubscibed
+                                    </Button>
+                                </div>
+                                :
+                                <div className="join-button">
                                     Your request is being processed...
-                                </Button>
-                            </div>
+                                    <Button title="delete request!!!"  bsStyle="link" onClick={this.deleteRequest.bind(this)}>
+                                        Remove request
+                                    </Button>
+                                </div>
                             :
                             <div className="join-button">
                                 <Button  bsStyle="link" onClick={this.joinTheGroup.bind(this)}>
@@ -66,10 +75,10 @@ Group.propTypes = {
     group: PropTypes.object.isRequired,
     
 };
-export default createContainer(() => {
+export default createContainer((props) => {
     Meteor.subscribe('userList');
     return {
         currentUser: Meteor.user(),
-        userList:UserList.findOne({UserId: Meteor.userId()}),
+        userList:UserList.findOne({UserId: Meteor.userId(), groupId: props.group._id}),
     };
 },Group);

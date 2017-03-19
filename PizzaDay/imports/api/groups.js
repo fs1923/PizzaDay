@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Items } from '../api/items.js'
 import { UserList } from './userList.js';
-import { MembersGroups } from './membersGroups.js';
 
 export const Groups = new Mongo.Collection('Groups');
 
@@ -38,19 +37,12 @@ Meteor.methods({
     'UserList.remove'(requestId){
         UserList.remove({_id: requestId});
     },
+    'UserList.update'(userListUpdate){
+        UserList.update({_id: userListUpdate._id},userListUpdate);
+    },
     'Items.insert'(itemInsert) {
         if (this.userId) {
             Items.insert(itemInsert);
-        }
-    },
-    'MembersGroups.insert'(UserId) {
-        if (this.userId) {
-            MembersGroups.insert({user: UserId});
-        }
-    },
-    'MembersGroups.remove'(membersId) {
-        if (this.userId) {
-            MembersGroups.remove({_id: membersId});
         }
     },
 });

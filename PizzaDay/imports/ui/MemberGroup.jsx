@@ -9,9 +9,11 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 export default class MemberGroup extends Component{
     removeMembers() {
-        let beforRemoveMembers = confirm('Are you sure?');
-        if ( beforRemoveMembers === true ) {
-            Meteor.call('MembersGroups.remove', this.props.memberGroup._id );
+        let beforAcceptMembers = confirm('Are you sure?');
+        if ( beforAcceptMembers === true ) {
+            let tempRequest = this.props.memberGroup;
+            tempRequest.status = "Request";
+            Meteor.call('UserList.update', tempRequest );
         };
     };
 /*    acceptUsers() {
@@ -36,19 +38,18 @@ export default class MemberGroup extends Component{
     };*/
     render(){
         return (
-
-        <tr>
-            <td>1</td>
-            <td>{ Meteor.users.findOne({_id: this.props.memberGroup.user}).username }</td>
-            <td>{ Meteor.users.findOne({_id: this.props.memberGroup.user}).emails[0].address }</td>
-            <td>
-                <div className="right-menu">
-                    <button className="delete" onClick={this.removeMembers.bind(this)} >
-                        &times;
-                    </button>
-                </div>
-            </td>
-        </tr>
+            <tr>
+                <td>1</td>
+                <td>{Meteor.users.findOne({_id:this.props.memberGroup.UserId}).username }</td>
+                <td>{Meteor.users.findOne({_id:this.props.memberGroup.UserId}).emails[0].address }</td>
+                <td>
+                    <div className="right-menu">
+                        <button className="delete" onClick={this.removeMembers.bind(this)}>
+                            &times;
+                        </button>
+                    </div>
+                </td>
+            </tr>
         );
     }
 }

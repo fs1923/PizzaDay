@@ -17,8 +17,9 @@ export default class Request extends Component{
     acceptUsers() {
         let beforAcceptMembers = confirm('Are you sure?');
         if ( beforAcceptMembers === true ) {
-            Meteor.call('MembersGroups.insert', this.props.request.UserId );
-            Meteor.call('UserList.remove', this.props.request._id );
+            let tempRequest = this.props.request;
+            tempRequest.status = "Follow";
+            Meteor.call('UserList.update', tempRequest );
         };
     };
 /*    joinTheGroup(){
