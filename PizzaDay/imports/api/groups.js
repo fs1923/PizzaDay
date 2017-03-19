@@ -45,5 +45,15 @@ Meteor.methods({
             Items.insert(itemInsert);
         }
     },
+    'Item.remove'(itemId) {
+        if (this.userId){
+            Items.remove({_id: itemId});
+        }
+    },
+    'Item.update'(itemUpdate) {
+        if (this.userId) {
+            Items.update({_id: itemUpdate._id},itemUpdate);
+        }
+    },
 });
 

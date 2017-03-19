@@ -3,11 +3,17 @@ import { Panel, Button } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Groups } from '../api/groups.js';
 
 
 
-
-export default class Item extends Component{
+class Item extends Component{
+    removeThisItem() {
+        const beforRemoveItem = confirm('Are you sure?');
+        if (beforRemoveItem) {
+            Meteor.call('Item.remove', this.props.item._id);
+        };
+    };
 
     render(){
         return (
@@ -20,17 +26,22 @@ export default class Item extends Component{
                 {Meteor.user() ?
                     <div className="right-menu">
                         <Button>
-                            By
-                        </Button>
+                            Add to cart
+                        </Button> 
+                        <Link to={`/group/${this.props.item._id}/updateItem`}>
+                                <span className="glyphicon glyphicon-pencil">
+                                </span>
+                        </Link>
+                        <button className="delete" onClick={this.removeThisItem.bind(this)}>
+                            &times;
+                        </button>
                     </div>
-                    :
-                    ''
-                }
+                   : '' }
             </Panel>
         );
     }
 }
 
-Request.propTypes = {
+Item.propTypes = {
     item: PropTypes.object.isRequired,
 };

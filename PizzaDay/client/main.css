@@ -47,7 +47,7 @@
 }
 .label-form-insert {
     position: absolute;
-    left: 26px;
+    left: 15px;
     top: 7px;
     color: #333;
     z-index: 2;
@@ -143,4 +143,17 @@
 .nav > li > a > a:hover{
     text-decoration: none;
     color: #FFF;
+}
+.relative{
+    position: relative;
+}
+.btn {
+    border-radius: 0;
+    margin-right: 5px;
+}
+.addToCart {
+    margin-right: 5px;
+}
+.panel-group .panel {
+    border-radius: 0;
 }
