@@ -52,5 +52,16 @@ Meteor.methods({
     'Cart.remove'(CartId){
         Cart.remove({_id: CartId});
     },
+    'Item.remove'(itemId) {
+        if (this.userId){
+            Cart.remove({ItemId:itemId});
+            Items.remove({_id: itemId});
+        }
+    },
+    'Item.update'(itemUpdate) {
+        if (this.userId) {
+            Items.update({_id: itemUpdate._id},itemUpdate);
+        }
+    },
 });
 

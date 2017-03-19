@@ -1,48 +1,56 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
+import { Items } from '../api/items.js';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
-import Items from '../api/items'
+import Spinner from './Spinner'
 
-export default class InsertItem extends Component {
-    insertItem(event) {
+class updateItem extends Component {
+    updateItem(event) {
         event.preventDefault();
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
-        const prise = ReactDOM.findDOMNode(this.refs.priseInput).value.trim();
-        itemInstert = {name:name,prise:prise,group:this.props.params.groupId}
-        Meteor.call('Items.insert', itemInstert , (err, result) => {
+        const prise = ReactDOM.findDOMNode(this.refs.priceInput).value.trim();
+        let itemUpdate = this.props.item;
+        itemUpdate.name = name;
+        itemUpdate.prise = prise;
+        Meteor.call('Item.update', itemUpdate, (err, result) => {
             if (err) throw err;
-            browserHistory.push('/group/'+this.props.params.groupId);
+            browserHistory.push('/group/'+this.props.item.group);
         });
     }
     render() {
+        if (this.props.loading) {
+            return <Spinner/>;
+        }
         return (
             <div className="container">
-                <h1>Add Item</h1>
+                <h1>Update Group</h1>
                 <div className="col-md-5">
                     <form>
                         <FormGroup className="relative" bsSize="large">
                             <ControlLabel className="label-form-insert">Name:</ControlLabel>
                             <FormControl className="inputName"
                                          type="text"
-                                         name="name"
                                          ref="nameInput"
+                                         placeholder={this.props.item.name}
                             />
                         </FormGroup>
                         <FormGroup className="relative" bsSize="large">
-                            <ControlLabel className="label-form-insert" >Prise:</ControlLabel>
+                            <ControlLabel className="label-form-insert">Prise:</ControlLabel>
                             <FormControl className="inputName"
                                          type="text"
-                                         name="prise"
-                                         ref="priseInput"
+                                         ref="priceInput"
                                          pattern="\d+(\.\d{2})?"
+                                         placeholder={this.props.item.prise}
                             />
                         </FormGroup>
                         <Button type="submit"
                                 className="formButton"
-                                onClick={this.insertItem.bind(this)}
+                                onClick={this.updateItem.bind(this)}
                         >
-                            <b>Add</b>
+                            <b>Update</b>
                         </Button>
                     </form>
                 </div>
@@ -50,3 +58,10 @@ export default class InsertItem extends Component {
         );
     }
 }
+export default createContainer(({params}) => {
+    const itemsSubs = Meteor.subscribe('items');
+    return {
+            loading: !itemsSubs.ready(),
+            item: Items.findOne({_id:params.itemId}),
+        }
+},updateItem)

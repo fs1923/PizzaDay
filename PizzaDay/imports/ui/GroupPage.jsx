@@ -14,7 +14,7 @@ import RenderCart from './RenderCart'
 class GroupPage extends Component {
     renderItem(){
         return this.props.items.map((item) => (
-            <Item key={item._id} item={item} />
+            <Item key={item._id} item={item} mainUser={this.props.groupPage.mainUser === Meteor.userId()} />
         ));
     };
     renderCart(){
