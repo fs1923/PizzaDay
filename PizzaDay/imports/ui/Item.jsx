@@ -8,9 +8,16 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 
 export default class Item extends Component{
+    addToCart(){
+        cartInstert = {UserId: Meteor.userId(), GroupId: this.props.item.group, ItemId:this.props.item._id};
+        Meteor.call('Cart.insert', cartInstert , (err, result) => {
+            if (err) throw err;
+        });
+    }
 
     render(){
         return (
+
 
             <Panel eventKey="1">
                 <span>Name item:</span>
@@ -19,8 +26,8 @@ export default class Item extends Component{
                 {this.props.item.prise}
                 {Meteor.user() ?
                     <div className="right-menu">
-                        <Button>
-                            By
+                        <Button onClick={this.addToCart.bind(this)}>
+                            Add to cart
                         </Button>
                     </div>
                     :

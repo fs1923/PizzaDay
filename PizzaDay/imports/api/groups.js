@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Items } from '../api/items.js'
 import { UserList } from './userList.js';
+import { Cart } from './cart.js'
 
 export const Groups = new Mongo.Collection('Groups');
 
@@ -44,6 +45,12 @@ Meteor.methods({
         if (this.userId) {
             Items.insert(itemInsert);
         }
+    },
+    'Cart.insert'(cartInsert) {
+            Cart.insert(cartInsert);
+    },
+    'Cart.remove'(CartId){
+        Cart.remove({_id: CartId});
     },
 });
 

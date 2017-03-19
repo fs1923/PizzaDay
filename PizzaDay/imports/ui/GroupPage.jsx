@@ -3,16 +3,23 @@ import { Meteor } from 'meteor/meteor';
 import { Groups } from '../api/groups.js';
 import { Items } from '../api/items.js';
 import { createContainer } from 'meteor/react-meteor-data';
-import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col } from 'react-bootstrap';
+import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import Spinner from './Spinner';
 import { Link } from 'react-router';
-import Item from '../ui/Item.jsx'
+import Item from '../ui/Item.jsx';
+import { Cart } from '../api/cart.js';
+import RenderCart from './RenderCart'
 
 class GroupPage extends Component {
     renderItem(){
         return this.props.items.map((item) => (
             <Item key={item._id} item={item} />
+        ));
+    };
+    renderCart(){
+        return this.props.cart.map((cart) => (
+            <RenderCart key={cart._id} cart={cart}/>
         ));
     };
     deleteThisGroup() {
@@ -55,10 +62,30 @@ class GroupPage extends Component {
                     :
                     ''
                 }
-                <h1>Items</h1>
-                <PanelGroup>
-                    {this.renderItem()}
-                </PanelGroup>
+                <div className="row">
+                    <Col xs={8} md={8}>
+                        <h1>Items</h1>
+                        <PanelGroup>
+                            {this.renderItem()}
+                        </PanelGroup>
+                    </Col>
+                    <Col xs={4} md={4}>
+                        <h1>Carts</h1>
+                        <Table responsive>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Prise</th>
+                                    <th>Quantity</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.renderCart()}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </div>
             </div>
         );
     }
@@ -70,9 +97,11 @@ export default createContainer(({params}) => {
     const groupsSubs = Meteor.subscribe('groups');
     const userSubs = Meteor.subscribe('users');
     const itemSubs = Meteor.subscribe('items');
+    const cartSubs = Meteor.subscribe('cart');
     return {
-        loading: !groupsSubs.ready() && !userSubs.ready() && !itemSubs.ready(),
+        loading: !groupsSubs.ready() && !userSubs.ready() && !itemSubs.ready() && !cartSubs.ready(),
         groupPage: Groups.findOne({_id:params.groupId}),
         items: Items.find({group:params.groupId}).fetch(),
+        cart: Cart.find({UserId:Meteor.userId(),GroupId:params.groupId}).fetch(),
     };
 },GroupPage)
