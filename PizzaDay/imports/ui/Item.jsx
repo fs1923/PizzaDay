@@ -17,13 +17,15 @@ export default class Item extends Component{
                 {this.props.item.name}
                 <span> Prise: </span>
                 {this.props.item.prise}
-
-                <div className="right-menu">
-                    <Button>
-                        By
-                    </Button>
-                </div>
-
+                {Meteor.user() ?
+                    <div className="right-menu">
+                        <Button>
+                            By
+                        </Button>
+                    </div>
+                    :
+                    ''
+                }
             </Panel>
         );
     }

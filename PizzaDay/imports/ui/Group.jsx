@@ -28,32 +28,36 @@ class Group extends Component{
 
     render(){
         return (
-                <Panel header={this.renderLinkName()} eventKey="1"> <span>Main User:  </span>
+            <Panel header={this.renderLinkName()} eventKey="1">
+                <span>Main User: {Meteor.users.findOne({_id:this.props.group.mainUser}).username}</span>
 
-                   {this.props.currentUser ? Meteor.users.findOne({_id:this.props.group.mainUser}).username : ''}
-                    
-                    { ( this.props.group.mainUser === Meteor.userId() ) ? <div className="right-menu">
-                            <Link to={`/updateGroup/${this.props.group._id}`}>
+                { this.props.group.mainUser===Meteor.userId() ?
+                    <div className="right-menu">
+                        <Link to={`/updateGroup/${this.props.group._id}`}>
                                 <span className="glyphicon glyphicon-pencil">
                                 </span>
-                            </Link>
-                            <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
+                        </Link>
+                        <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
                             &times;
-                            </button>
-                     </div> : ''}
-                         { (this.props.currentUser && this.props.group.mainUser != Meteor.userId()) ? 
-                            ( this.props.userList && this.props.userList.groupId === this.props.group._id ) ?
-                             <div className="join-button">
+                        </button>
+                    </div>
+                    :
+                    this.props.currentUser ?
+                        (this.props.userList && this.props.userList.groupId === this.props.group._id) ?
+                            <div className="join-button">
                                 <Button title="delete request!!!"  bsStyle="link" onClick={this.deleteRequest.bind(this)}>
                                     Your request is being processed...
                                 </Button>
                             </div>
-                            :<div className="join-button">
+                            :
+                            <div className="join-button">
                                 <Button  bsStyle="link" onClick={this.joinTheGroup.bind(this)}>
                                     join the group
                                 </Button>
-                            </div> : ''}
-                </Panel>
+                            </div>
+                        : ''
+                }
+            </Panel>
         );
     }
 }

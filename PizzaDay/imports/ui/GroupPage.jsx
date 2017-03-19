@@ -3,21 +3,24 @@ import { Meteor } from 'meteor/meteor';
 import { Groups } from '../api/groups.js';
 import { Items } from '../api/items.js';
 import { createContainer } from 'meteor/react-meteor-data';
-import { PanelGroup, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
+import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import Spinner from './Spinner';
 import { Link } from 'react-router';
 import Item from '../ui/Item.jsx'
 
 class GroupPage extends Component {
-    renderLink() {
-        return (<Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link>);
-    };
     renderItem(){
         return this.props.items.map((item) => (
             <Item key={item._id} item={item} />
         ));
-    }
+    };
+    deleteThisGroup() {
+        let beforDeleteGroups = confirm('Are you sure?');
+        if ( beforDeleteGroups === true ) {
+            Meteor.call('Groups.remove', this.props.params.groupId, Meteor.user() );
+        };
+    };
     render() {
         if (this.props.loading) {
             return <Spinner/>;
@@ -25,16 +28,33 @@ class GroupPage extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-10">
+                    <Col xs={9} md={9} >
                         <h1>{this.props.groupPage.name}</h1>
-                    </div>
-                    <div className="col-md-2">
-                       {(this.props.groupPage.mainUser === Meteor.userId()) ? <Button bsStyle="link">{this.renderLink()}</Button> : ''}
-                    </div>
+                    </Col>
+                    {(this.props.groupPage.mainUser === Meteor.userId()) ?
+                        <Col xs={3} md={3} >
+                            <Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link>
+                            <div className="right-menu">
+                                <Link to={`/updateGroup/${this.props.params.groupId}`}>
+                                    <span className="glyphicon glyphicon-pencil"></span>
+                                </Link>
+                                <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
+                                    &times;
+                                </button>
+                            </div>
+                        </Col>
+
+                        :
+                        ''
+                    }
                 </div>
-                <div>
-                    {(this.props.groupPage.mainUser === Meteor.userId()) ?<Link className="btn btn-success" to={`/group/${this.props.groupPage._id}/insertItem`}>Add item</Link> : '' }
-                </div>
+                {(this.props.groupPage.mainUser === Meteor.userId()) ?
+                    <div>
+                        <Link className="btn btn-success" to={`/group/${this.props.groupPage._id}/insertItem`}>Add item</Link>
+                    </div>
+                    :
+                    ''
+                }
                 <h1>Items</h1>
                 <PanelGroup>
                     {this.renderItem()}
