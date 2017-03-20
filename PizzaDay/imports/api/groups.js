@@ -63,5 +63,10 @@ Meteor.methods({
             Items.update({_id: itemUpdate._id},itemUpdate);
         }
     },
+    'CartAll.remove'() {
+        if (this.userId){
+            Cart.remove({});
+        }
+    },
 });
 

@@ -20,7 +20,7 @@ export default class InsertGroup extends Component {
                 <h1>Add Group</h1>
                 <div className="col-md-5">
                     <form>
-                            <FormGroup bsSize="large">
+                            <FormGroup className="relative" bsSize="large">
                                 <ControlLabel className="label-form-insert">Name:</ControlLabel>
                                 <FormControl className="inputName"
                                     type="text"
