@@ -9,10 +9,12 @@ export default class InsertItem extends Component {
         event.preventDefault();
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
         const prise = ReactDOM.findDOMNode(this.refs.priseInput).value.trim();
-        itemInstert = {name:name,prise:prise,group:this.props.params.groupId}
-        Meteor.call('Items.insert', itemInstert , (err, result) => {
-            if (err) throw err;
-            browserHistory.push('/group/'+this.props.params.groupId);
+        itemInstert = {name: name, prise: prise, group: this.props.params.groupId}
+        Meteor.call('Items.insert', itemInstert, (error, result) => {
+            if (error)
+                $.notify(error.reason, {type: "danger" });
+            else
+                browserHistory.push('/group/' + this.props.params.groupId);
         });
     }
     render() {

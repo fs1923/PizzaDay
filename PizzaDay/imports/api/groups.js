@@ -24,11 +24,15 @@ Meteor.methods({
     },
     'Groups.insert'(groupInsert) {
         if (this.userId) {
+            if (groupInsert.name.length<3)
+                throw new Meteor.Error(500, 'Error: The name must consist of more than three characters', 'The name must consist of more than three characters');
             Groups.insert(groupInsert);
         }
     },
     'Groups.update'(groupUpdate) {
         if (this.userId) {
+            if (groupUpdate.name.length<3)
+                throw new Meteor.Error(500, 'Error: The name must consist of more than three characters', 'The name must consist of more than three characters');
             Groups.update({_id:groupUpdate._id},groupUpdate);
         }
     },
@@ -43,6 +47,11 @@ Meteor.methods({
     },
     'Items.insert'(itemInsert) {
         if (this.userId) {
+            if (isNaN(itemInsert.prise) || itemInsert.prise=='')
+                throw new Meteor.Error(500, 'Error: Price is not a number', 'Price is not a number');
+            if (itemInsert.name.length<3)
+                throw new Meteor.Error(500, 'Error: The name must consist of more than three characters', 'The name must consist of more than three characters');
+
             Items.insert(itemInsert);
         }
     },
@@ -60,6 +69,10 @@ Meteor.methods({
     },
     'Item.update'(itemUpdate) {
         if (this.userId) {
+            if (isNaN(itemUpdate.prise) || itemUpdate.prise=='')
+                throw new Meteor.Error(500, 'Error: Price is not a number', 'Price is not a number');
+            if (itemUpdate.name.length<3)
+                throw new Meteor.Error(500, 'Error: The name must consist of more than three characters', 'The name must consist of more than three characters');
             Items.update({_id: itemUpdate._id},itemUpdate);
         }
     },

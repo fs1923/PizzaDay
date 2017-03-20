@@ -9,9 +9,11 @@ export default class InsertGroup extends Component {
 
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
         groupInstert = {name:name,mainUser:Meteor.user()._id}
-        Meteor.call('Groups.insert', groupInstert , (err, result) => {
-            if (err) throw err;
-            browserHistory.push('/');
+        Meteor.call('Groups.insert', groupInstert , (error, result) => {
+            if (error)
+                $.notify(error.reason, {type: "danger" });
+            else
+                browserHistory.push('/');
         });
     }
     render() {

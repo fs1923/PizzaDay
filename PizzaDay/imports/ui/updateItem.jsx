@@ -15,9 +15,11 @@ class updateItem extends Component {
         let itemUpdate = this.props.item;
         itemUpdate.name = name;
         itemUpdate.prise = prise;
-        Meteor.call('Item.update', itemUpdate, (err, result) => {
-            if (err) throw err;
-            browserHistory.push('/group/'+this.props.item.group);
+        Meteor.call('Item.update', itemUpdate, (error, result) => {
+            if (error)
+                $.notify(error.reason, {type: "danger" });
+            else
+                browserHistory.push('/group/'+this.props.item.group);
         });
     }
     render() {

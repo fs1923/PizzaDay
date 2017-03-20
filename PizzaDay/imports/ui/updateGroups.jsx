@@ -15,9 +15,11 @@ class updateGroups extends Component {
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
         groupUpdate = this.props.group;
         groupUpdate.name = name;
-        Meteor.call('Groups.update', groupUpdate, (err, result) => {
-            if (err) throw err;
-            browserHistory.push('/');
+        Meteor.call('Groups.update', groupUpdate, (error, result) => {
+            if (error)
+                $.notify(error.reason, {type: "danger" });
+            else
+                browserHistory.push('/');
         });
     }
     render() {
