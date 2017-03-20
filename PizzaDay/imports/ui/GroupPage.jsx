@@ -11,6 +11,7 @@ import Item from '../ui/Item.jsx';
 import { Cart } from '../api/cart.js';
 import RenderCart from './RenderCart'
 
+
 class GroupPage extends Component {
     renderItem(){
         return this.props.items.map((item) => (

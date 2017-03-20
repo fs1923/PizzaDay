@@ -20,8 +20,8 @@ class RenderCart extends Component{
         return (
             <tr>
                 <td>{this.props.item.name}</td>
-                <td>{this.props.item.prise}</td>
-                <td>1</td>
+                <td>{this.props.item.prise*this.props.cart.Quantity+"$"}</td>
+                <td>{this.props.cart.Quantity}</td>
                 <td>
                     <button className="delete" onClick={this.deleteThisCart.bind(this)}>
                         &times;

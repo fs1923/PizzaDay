@@ -56,7 +56,14 @@ Meteor.methods({
         }
     },
     'Cart.insert'(cartInsert) {
+        tmpcart = Cart.findOne({UserId: cartInsert.UserId, GroupId: cartInsert.GroupId, ItemId:cartInsert.ItemId});
+        if (tmpcart) {
+            tmpcart.Quantity += 1;
+            Cart.update({_id: tmpcart._id},tmpcart);
+        }
+        else {
             Cart.insert(cartInsert);
+        }
     },
     'Cart.remove'(CartId){
         Cart.remove({_id: CartId});

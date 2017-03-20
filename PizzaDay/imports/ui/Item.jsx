@@ -9,7 +9,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 export default class Item extends Component{
     addToCart(){
-        cartInstert = {UserId: Meteor.userId(), GroupId: this.props.item.group, ItemId:this.props.item._id};
+        cartInstert = {UserId: Meteor.userId(), GroupId: this.props.item.group, Quantity:1, ItemId:this.props.item._id};
         Meteor.call('Cart.insert', cartInstert , (err, result) => {
             if (err) throw err;
         });
