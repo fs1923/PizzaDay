@@ -157,3 +157,41 @@
 .panel-group .panel {
     border-radius: 0;
 }
+.margin-top{
+    margin-top: -20px;
+}
+.image-change{
+    opacity: 0.8;
+}
+.menu-under-image{
+    height: 80px;
+    background: #FFF;
+    border:1px solid #ddd;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    line-height: 40px;
+}
+.float_l{
+    float: left;
+
+}
+.bg-none > a,.bg-none > button {
+    padding: 15px;
+    background: none;
+    color: #333;
+    font-weight: normal;
+    font-size: 18px;
+}
+.bg-none > button:hover {
+    text-decoration: underline;
+}
+body{
+    background: #edeef0;
+}
+.text-item-title {
+    display: inline-block;
+}
+.button-margin {
+    margin: 20px;
+    margin-bottom: 35px;
+
+}

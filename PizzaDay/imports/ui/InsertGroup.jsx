@@ -8,7 +8,8 @@ export default class InsertGroup extends Component {
         event.preventDefault();
 
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
-        groupInstert = {name:name,mainUser:Meteor.user()._id}
+        const url = ReactDOM.findDOMNode(this.refs.urlInput).value.trim();
+        groupInstert = {name:name,mainUser:Meteor.user()._id, url: url};
         Meteor.call('Groups.insert', groupInstert , (err, result) => {
             if (err) throw err;
             browserHistory.push('/');
@@ -28,6 +29,14 @@ export default class InsertGroup extends Component {
                                     ref="nameInput"
                              />
                             </FormGroup>
+                        <FormGroup bsSize="large">
+                            <ControlLabel >Image:</ControlLabel>
+                            <FormControl className="inputName"
+                                         type="text"
+                                         name="name"
+                                         ref="urlInput"
+                            />
+                        </FormGroup>
                             <Button type="submit"
                                     className="formButton"
                                     onClick={this.insertGroup.bind(this)}
