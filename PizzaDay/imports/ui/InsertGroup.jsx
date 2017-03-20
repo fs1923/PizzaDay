@@ -31,8 +31,8 @@ export default class InsertGroup extends Component {
                                     ref="nameInput"
                              />
                             </FormGroup>
-                        <FormGroup bsSize="large">
-                            <ControlLabel >Image:</ControlLabel>
+                        <FormGroup className="relative" bsSize="large">
+                            <ControlLabel className="label-form-insert" >Image:</ControlLabel>
                             <FormControl className="inputName"
                                          type="text"
                                          name="name"
