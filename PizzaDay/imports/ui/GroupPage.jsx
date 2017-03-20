@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Groups } from '../api/groups.js';
 import { Items } from '../api/items.js';
 import { createContainer } from 'meteor/react-meteor-data';
-import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table } from 'react-bootstrap';
+import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table, Image } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import Spinner from './Spinner';
 import { Link } from 'react-router';
@@ -40,38 +40,43 @@ class GroupPage extends Component {
             return <Spinner/>;
         }
         return (
+            <div>
+            <div className="container-fluid">
+                <div className="row image-change margin-top">
+                    <Image height="10%" width="100%" src={`${this.props.groupPage.url}`} responsive />
+                </div>
+                <div className="row menu-under-image">
+                    <div className="col-md-10 col-md-offset-1">
+                        <Col md={7} >
+                            <h1>{this.props.groupPage.name}</h1>
+                        </Col>
+                        {(this.props.groupPage.mainUser === Meteor.userId()) ?
+                            <Col md={5} >
+                                <div className="right-menu bg-none">
+                                    <Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link>
+                                    <Link to={`/updateGroup/${this.props.params.groupId}`}>
+                                        <span>Edit</span>
+                                    </Link>
+                                    <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
+                                        <span> Remove group</span>
+                                    </button>
+                                </div>
+                            </Col>
+                            :
+                            ''
+                        }
+                    </div>
+                </div>
+            </div>
             <div className="container">
                 <div className="row">
-                    <Col xs={9} md={9} >
-                        <h1>{this.props.groupPage.name}</h1>
-                    </Col>
-                    {(this.props.groupPage.mainUser === Meteor.userId()) ?
-                        <Col xs={3} md={3} >
-                            <Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link>
-                            <div className="right-menu">
-                                <Link to={`/updateGroup/${this.props.params.groupId}`}>
-                                    <span className="glyphicon glyphicon-pencil"></span>
-                                </Link>
-                                <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
-                                    &times;
-                                </button>
-                            </div>
-                        </Col>
-
-                        :
-                        ''
-                    }
-                </div>
-                {(this.props.groupPage.mainUser === Meteor.userId()) ?
-                    <div>
-                        <Link className="btn btn-success" to={`/group/${this.props.groupPage._id}/insertItem`}>Add item</Link>
-                    </div>
-                    :
-                    ''
-                }
-                <div className="row">
                     <Col xs={8} md={8}>
-                        <h1>Items</h1>
+                        <h1 className="text-item-title">Items</h1>
+                        {(this.props.groupPage.mainUser === Meteor.userId()) ?
+                            <Link className="btn btn-info  button-margin" to={`/group/${this.props.groupPage._id}/insertItem`}>Add item</Link>
+                            :
+                            ''
+                        }
                         <PanelGroup>
                             {this.renderItem()}
                         </PanelGroup>
@@ -100,6 +105,7 @@ class GroupPage extends Component {
                         </Table>
                     </Col>
                 </div>
+            </div>
             </div>
         );
     }
