@@ -11,10 +11,7 @@ import Spinner from './Spinner'
 
 class RenderCart extends Component{
     deleteThisCart(){
-        let beforDeleteGroups = confirm('Are you sure?');
-        if ( beforDeleteGroups === true ) {
             Meteor.call('Cart.remove', this.props.cart._id );
-        };
     }
     render(){
         if (this.props.loading) {

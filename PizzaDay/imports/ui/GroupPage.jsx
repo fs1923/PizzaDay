@@ -24,9 +24,15 @@ class GroupPage extends Component {
     };
     deleteThisGroup() {
         let beforDeleteGroups = confirm('Are you sure?');
-        if ( beforDeleteGroups === true ) {
+        if ( beforDeleteGroups ) {
             Meteor.call('Groups.remove', this.props.params.groupId, Meteor.user() );
         };
+    };
+    removeCart() {
+        let beforRemoveCart = confirm('Are you sure?');
+        if ( beforRemoveCart ) {
+            Meteor.call('CartAll.remove');
+        }
     };
     render() {
         if (this.props.loading) {
@@ -82,6 +88,13 @@ class GroupPage extends Component {
                             </thead>
                             <tbody>
                                 {this.renderCart()}
+                                {this.props.cartCheck ? <tr>
+                                     <td></td>
+                                     <td></td>
+                                     <td></td>
+                                     <td><Button onClick={this.removeCart.bind(this)} className="right-menu" bsStyle="danger">Remove</Button></td>
+
+                                </tr> : ''}
                             </tbody>
                         </Table>
                     </Col>
@@ -103,5 +116,6 @@ export default createContainer(({params}) => {
         groupPage: Groups.findOne({_id:params.groupId}),
         items: Items.find({group:params.groupId}).fetch(),
         cart: Cart.find({UserId:Meteor.userId(),GroupId:params.groupId}).fetch(),
+        cartCheck: Cart.findOne({}),
     };
 },GroupPage)
