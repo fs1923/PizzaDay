@@ -116,6 +116,6 @@ export default createContainer(({params}) => {
         groupPage: Groups.findOne({_id:params.groupId}),
         items: Items.find({group:params.groupId}).fetch(),
         cart: Cart.find({UserId:Meteor.userId(),GroupId:params.groupId}).fetch(),
-        cartCheck: Cart.findOne({}),
+        cartCheck: Cart.findOne({UserId:Meteor.userId(),GroupId:params.groupId}),
     };
 },GroupPage)
