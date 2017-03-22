@@ -193,5 +193,10 @@ body{
 .button-margin {
     margin: 20px;
     margin-bottom: 35px;
-
+}
+.Edit-button-item{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    z-index: 2;
 }

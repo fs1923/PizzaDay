@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Panel, Button } from 'react-bootstrap';
+import { Panel, Button, Col, Thumbnail } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -23,32 +23,32 @@ export default class Item extends Component{
 
     render(){
         return (
-
-            <Panel eventKey="1">
-                <span>Name item:</span>
-                {this.props.item.name}
-                <span> Prise: </span>
-                {this.props.item.prise}
-                {Meteor.user() ?
-                    this.props.mainUser ?
-                        <div className="right-menu">
-                            <Link to={`/group/${this.props.item._id}/updateItem`}>
-                                <span className="glyphicon glyphicon-pencil"></span>
-                            </Link>
-                            <button className="delete" onClick={this.removeThisItem.bind(this)}>
-                                &times;
-                            </button>
-                        </div>
-                        :
-                        <div className="right-menu">
-                            <Button onClick={this.addToCart.bind(this)}>
-                                Add to cart
-                            </Button>
-                        </div>
-                    :
-                    ''
-                }
-            </Panel>
+        
+                    <Col md={4}>
+                        <Thumbnail src="/" alt="242x200" className="relative">
+                            <h3>{this.props.item.name}</h3>
+                            <p>{this.props.item.prise} $</p>
+                            
+                                {Meteor.user() ?
+                                    this.props.mainUser ?
+                                        <p className="Edit-button-item">
+                                            <Link to={`/group/${this.props.item._id}/updateItem`}>
+                                                <span className="glyphicon glyphicon-pencil"></span>
+                                            </Link>
+                                            <button className="delete" onClick={this.removeThisItem.bind(this)}>
+                                                &times;
+                                            </button>
+                                        </p>
+                                        :
+                                        <p>
+                                            <Button onClick={this.addToCart.bind(this)} bsStyle="default">Add to cart</Button>
+                                        </p>
+                                :
+                                ''
+                            }
+                            
+                        </Thumbnail>
+                    </Col>
         );
     }
 }
