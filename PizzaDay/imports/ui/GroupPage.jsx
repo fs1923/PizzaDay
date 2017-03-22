@@ -23,6 +23,14 @@ class GroupPage extends Component {
             <RenderCart key={cart._id} cart={cart}/>
         ));
     };
+    sum(){
+        s = 0;
+        this.props.cart.forEach(function(cart, i, arr) {
+            //alert( i + ": " + cart.Quantity);
+            s+=cart.Quantity*Items.findOne({_id:cart.ItemId}).prise;
+        });
+        return s;
+    };
     deleteThisGroup() {
         let beforDeleteGroups = confirm('Are you sure?');
         if ( beforDeleteGroups ) {
@@ -35,6 +43,7 @@ class GroupPage extends Component {
             Meteor.call('CartAll.remove');
         }
     };
+    byCart(){};
     render() {
         if (this.props.loading) {
             return <Spinner/>;
@@ -99,8 +108,8 @@ class GroupPage extends Component {
                             <tbody>
                                 {this.renderCart()}
                                 {this.props.cartCheck ? <tr>
-                                     <td></td>
-                                     <td></td>
+                                     <td><Button onClick={this.byCart.bind(this)} bsStyle="primary">By</Button></td>
+                                     <td>{this.sum()+"$"}</td>
                                      <td></td>
                                      <td><Button onClick={this.removeCart.bind(this)} className="right-menu" bsStyle="danger">Remove</Button></td>
 
