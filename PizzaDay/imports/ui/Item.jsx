@@ -3,11 +3,9 @@ import { Panel, Button, Col, Thumbnail } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
+import { UserList } from '../api/userList.js';
 
-
-
-
-export default class Item extends Component{
+class Item extends Component{
     addToCart(){
         cartInstert = {UserId: Meteor.userId(), GroupId: this.props.item.group, Quantity:1, ItemId:this.props.item._id};
         Meteor.call('Cart.insert', cartInstert , (err, result) => {
@@ -24,12 +22,12 @@ export default class Item extends Component{
     render(){
         return (
         
-                    <Col md={4}>
+                    <Col sm={8} md={4}>
                         <Thumbnail src="/" alt="242x200" className="relative">
                             <h3>{this.props.item.name}</h3>
                             <p>{this.props.item.prise} $</p>
                             
-                                {Meteor.user() ?
+                                { Meteor.user() ?
                                     this.props.mainUser ?
                                         <p className="Edit-button-item">
                                             <Link to={`/group/${this.props.item._id}/updateItem`}>
@@ -46,7 +44,6 @@ export default class Item extends Component{
                                 :
                                 ''
                             }
-                            
                         </Thumbnail>
                     </Col>
         );
@@ -57,3 +54,8 @@ Request.propTypes = {
     item: PropTypes.object.isRequired,
     mainUser: PropTypes.object.isRequired,
 };
+export default createContainer(() => {
+    return {
+        checkFollow: UserList.findOne({_id: Meteor.userId(), status: "Follow"}),
+    };
+},Item);
