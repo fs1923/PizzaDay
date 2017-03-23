@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { Items } from '../api/items.js'
+import { Items } from '../api/items.js';
 import { UserList } from './userList.js';
-import { Cart } from './cart.js'
+import { Cart } from './cart.js';
+import { Shopping } from './shopping.js';
 
 export const Groups = new Mongo.Collection('Groups');
 
@@ -83,9 +84,14 @@ Meteor.methods({
             Items.update({_id: itemUpdate._id},itemUpdate);
         }
     },
-    'CartAll.remove'() {
+    'CartAll.remove'(userId) {
         if (this.userId){
-            Cart.remove({});
+            Cart.remove({UserId: userId});
+        }
+    },
+    'Insert.Shopping'(shopping) {
+        if (this.userId) {
+            Shopping.insert(shopping);
         }
     },
 });

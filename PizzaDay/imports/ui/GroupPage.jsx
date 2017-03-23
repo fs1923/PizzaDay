@@ -9,7 +9,8 @@ import Spinner from './Spinner';
 import { Link } from 'react-router';
 import Item from '../ui/Item.jsx';
 import { Cart } from '../api/cart.js';
-import RenderCart from './RenderCart'
+import RenderCart from './RenderCart';
+import { UserList } from '../api/userList.js';
 
 
 class GroupPage extends Component {
@@ -40,10 +41,20 @@ class GroupPage extends Component {
     removeCart() {
         let beforRemoveCart = confirm('Are you sure?');
         if ( beforRemoveCart ) {
-            Meteor.call('CartAll.remove');
+            Meteor.call('CartAll.remove', Meteor.userId());
         }
     };
-    byCart(){};
+    byCart(){
+        let beforBuyItem = confirm(`You buy on sum:` + this.sum()+"$");
+        if ( beforBuyItem ) {
+            let shopping = { items: [], userId: Meteor.userId(), groupId: this.props.params.groupId, priceSum: this.sum()} ;
+            this.props.cart.forEach(function(cart, i, arr) {
+                shopping.items.push({ name: Items.findOne({_id:cart.ItemId}).name, quantity: cart.Quantity, price: Items.findOne({_id:cart.ItemId}).prise });
+            });
+            Meteor.call('Insert.Shopping', shopping);
+            Meteor.call('CartAll.remove', Meteor.userId());
+        }
+    };
     render() {
         if (this.props.loading) {
             return <Spinner/>;
@@ -52,7 +63,7 @@ class GroupPage extends Component {
             <div>
             <div className="container-fluid">
                 <div className="row image-change margin-top">
-                    <img  height="350px" width="100%" src={`${this.props.groupPage.url}`} className="responsive" />
+                    <img height="350px" width="100%" src={`${this.props.groupPage.url}`} className="responsive" />
                 </div>
                 <div className="row menu-under-image">
                     <div className="col-md-10 col-md-offset-1">
@@ -67,35 +78,38 @@ class GroupPage extends Component {
                                         <span>Edit</span>
                                     </Link>
                                     <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
-                                        <span> Remove group</span>
+                                        <span>Remove group</span>
                                     </button>
                                 </div>
                             </Col>
-                            :
-                            ''
-                        }
+                        : ''  }
                     </div>
                 </div>
             </div>
-            <div className="container">
-                
-                        
-                    
+            <div className="container">   
                 <Row>
-                    
+                    <Col xs={12} md={8}>
                         <h1 className="text-item-title">Items</h1>
                         {(this.props.groupPage.mainUser === Meteor.userId()) ?
                             <Link className="btn btn-info  button-margin" to={`/group/${this.props.groupPage._id}/insertItem`}>Add item</Link>
                             :
                             ''
                         }
+                    </Col>
+                    {this.props.cartCheck ?
+                        <Col xs={6} md={4}>
+                            <h1>Cart</h1>
+                        </Col> : ''}
                 </Row>
                 <Row>
-                        <Col md={8}>
-                                {this.renderItem()}
-                        </Col>
-                    <Col md={4}>
-                        <h1>Carts</h1>
+                    {this.props.cartCheck ?
+                        <Col xs={12} md={8}>
+                            {this.renderItem()}
+                        </Col> : 
+                            this.renderItem()
+                    }
+                    {this.props.cartCheck ?
+                    <Col xs={12} md={4}>
                         <Table responsive>
                             <thead>
                                 <tr>
@@ -105,18 +119,19 @@ class GroupPage extends Component {
                                     <th></th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 {this.renderCart()}
-                                {this.props.cartCheck ? <tr>
-                                     <td><Button onClick={this.byCart.bind(this)} bsStyle="primary">By</Button></td>
+                                 <tr>
+                                     <td><Button onClick={this.byCart.bind(this)} bsStyle="primary">Buy</Button></td>
                                      <td>{this.sum()+"$"}</td>
                                      <td></td>
                                      <td><Button onClick={this.removeCart.bind(this)} className="right-menu" bsStyle="danger">Remove</Button></td>
-
-                                </tr> : ''}
+                                </tr> 
                             </tbody>
                         </Table>
                     </Col>
+                    : ''}
                 </Row>
             </div>
             </div>
