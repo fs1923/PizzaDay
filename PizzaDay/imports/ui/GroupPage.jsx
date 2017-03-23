@@ -16,7 +16,7 @@ import { UserList } from '../api/userList.js';
 class GroupPage extends Component {
     renderItem(){
         return this.props.items.map((item) => (
-            <Item key={item._id} item={item} mainUser={this.props.groupPage.mainUser === Meteor.userId()} />
+            <Item key={item._id} item={item} userListCheck={ UserList.findOne({UserId: Meteor.userId(), groupId:this.props.params.groupId, status:"Follow"}) } mainUser={this.props.groupPage.mainUser === Meteor.userId()} />
         ));
     };
     renderCart(){
@@ -146,8 +146,9 @@ export default createContainer(({params}) => {
     const userSubs = Meteor.subscribe('users');
     const itemSubs = Meteor.subscribe('items');
     const cartSubs = Meteor.subscribe('cart');
+    const userListSubs = Meteor.subscribe('userList');
     return {
-        loading: !groupsSubs.ready() && !userSubs.ready() && !itemSubs.ready() && !cartSubs.ready(),
+        loading: !groupsSubs.ready() && !userSubs.ready() && !itemSubs.ready() && !cartSubs.ready() && !userListSubs.ready(),
         groupPage: Groups.findOne({_id:params.groupId}),
         items: Items.find({group:params.groupId}).fetch(),
         cart: Cart.find({UserId:Meteor.userId(),GroupId:params.groupId}).fetch(),
