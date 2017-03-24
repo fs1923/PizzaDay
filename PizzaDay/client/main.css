@@ -165,11 +165,9 @@
     opacity: 0.8;
 }
 .menu-under-image{
-    height: 80px;
     background: #FFF;
     border:1px solid #ddd;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    line-height: 40px;
 }
 .float_l{
     float: left;
@@ -200,4 +198,21 @@ body{
     top: 0;
     right: 5px;
     z-index: 2;
+}
+.button-cart{
+    padding: 5px;
+    border-radius: 0;
+    background: #FFF;
+    border:1px solid #ddd;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+.right-menu > li > a > a{
+    color: #333;
+}
+.right-menu > li > a > a:hover{
+    color: black;
+    text-decoration: underline;
+}
+.dropdown-menu{
+    border-radius: 0;
 }

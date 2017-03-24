@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Groups } from '../api/groups.js';
 import { Items } from '../api/items.js';
 import { createContainer } from 'meteor/react-meteor-data';
-import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table, Row, Thumbnail, Grid } from 'react-bootstrap';
+import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table, Row, Thumbnail, Grid, Navbar, Nav, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import Spinner from './Spinner';
 import { Link } from 'react-router';
@@ -27,7 +27,6 @@ class GroupPage extends Component {
     sum(){
         s = 0;
         this.props.cart.forEach(function(cart, i, arr) {
-            //alert( i + ": " + cart.Quantity);
             s+=cart.Quantity*Items.findOne({_id:cart.ItemId}).prise;
         });
         return s;
@@ -65,26 +64,31 @@ class GroupPage extends Component {
                 <div className="row image-change margin-top">
                     <img height="350px" width="100%" src={`${this.props.groupPage.url}`} className="responsive" />
                 </div>
-                <div className="row menu-under-image">
-                    <div className="col-md-10 col-md-offset-1">
-                        <Col md={6} >
-                            <h1>{this.props.groupPage.name}</h1>
-                        </Col>
+                <Row>
+                    <Navbar className="menu-under-image">
+                        <Navbar.Header>
+                            <Navbar.Brand>
+                                <span>{this.props.groupPage.name}</span>
+                            </Navbar.Brand>
+                            <Navbar.Toggle />
+                        </Navbar.Header>
+                        <Navbar.Collapse>
                         {(this.props.groupPage.mainUser === Meteor.userId()) ?
-                            <Col md={6} >
-                                <div className="right-menu bg-none">
-                                    <Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link>
-                                    <Link to={`/updateGroup/${this.props.params.groupId}`}>
-                                        <span>Edit</span>
-                                    </Link>
-                                    <button className="delete" onClick={this.deleteThisGroup.bind(this)}>
-                                        <span>Remove group</span>
-                                    </button>
-                                </div>
-                            </Col>
-                        : ''  }
-                    </div>
-                </div>
+                            <Nav pullRight className="right-menu">
+                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link></NavItem>
+                                <NavDropdown eventKey={2} title="Options group" id="basic-nav-dropdown">
+                                    <MenuItem eventKey={2.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>edit</Link></MenuItem>
+                                    <MenuItem divider />
+                                    <MenuItem onClick={this.deleteThisGroup.bind(this)} eventKey={2.2} >remove group</MenuItem>
+                                </NavDropdown>
+                            </Nav>
+                            :
+                            ''
+                        }
+                        </Navbar.Collapse>
+                    </Navbar>
+
+                </Row>
             </div>
             <div className="container">   
                 <Row>
@@ -119,15 +123,14 @@ class GroupPage extends Component {
                                     <th></th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 {this.renderCart()}
-                                 <tr>
-                                     <td><Button onClick={this.byCart.bind(this)} bsStyle="primary">Buy</Button></td>
-                                     <td>{this.sum()+"$"}</td>
-                                     <td></td>
-                                     <td><Button onClick={this.removeCart.bind(this)} className="right-menu" bsStyle="danger">Remove</Button></td>
-                                </tr> 
+                                <tr>
+                                    <td><button className="button-cart" onClick={this.byCart.bind(this)}>Buy</button></td>
+                                    <td>{this.sum()+"$"}</td>
+                                    <td></td>
+                                    <td> <button className="button-cart" onClick={this.removeCart.bind(this)}>Remove</button> </td>
+                                </tr>
                             </tbody>
                         </Table>
                     </Col>
