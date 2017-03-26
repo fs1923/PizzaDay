@@ -75,11 +75,13 @@ class GroupPage extends Component {
                         <Navbar.Collapse>
                         {(this.props.groupPage.mainUser === Meteor.userId()) ?
                             <Nav pullRight className="right-menu">
-                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link></NavItem>
-                                <NavDropdown eventKey={2} title="Options group" id="basic-nav-dropdown">
-                                    <MenuItem eventKey={2.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>edit</Link></MenuItem>
+                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/request#uncontrolled-tab-example-pane-1`}>request</Link></NavItem>
+                                <NavItem eventKey={2}><Link to={`/group/${this.props.params.groupId}/request#uncontrolled-tab-example-pane-2`}>members</Link></NavItem>
+                                <NavItem eventKey={3}><Link to={`/group/${this.props.params.groupId}/request#uncontrolled-tab-example-pane-3`}>shopping story</Link></NavItem>
+                                <NavDropdown eventKey={4} title="Options group" id="basic-nav-dropdown">
+                                    <MenuItem eventKey={4.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>edit</Link></MenuItem>
                                     <MenuItem divider />
-                                    <MenuItem onClick={this.deleteThisGroup.bind(this)} eventKey={2.2} >remove group</MenuItem>
+                                    <MenuItem onClick={this.deleteThisGroup.bind(this)} eventKey={4.2} >remove group</MenuItem>
                                 </NavDropdown>
                             </Nav>
                             :

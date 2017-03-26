@@ -27,6 +27,12 @@ class RequestUser extends Component{
             <ShoppingHistory key={purchase._id} purchase={purchase} />
         ));
     };
+    removeHistory() {
+        const beforRemoveStory = confirm('Are you sure?');
+        if (beforRemoveStory) {
+            Meteor.call('Remove.Shopping');
+        }
+    };
     render(){
         if (this.props.loading) {
             return <Spinner/>;
@@ -80,6 +86,14 @@ class RequestUser extends Component{
                             </thead>
                             <tbody>
                                 {this.renderShoppingHistory()}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button className="delete" onClick={this.removeHistory.bind(this)}>Remove history</button></td>
+                                </tr>
                             </tbody>
                         </Table>
                     </Tab>

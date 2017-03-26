@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 
-export default class ShoppingHistory extends Component {
+export default class PurchaseUser extends Component {
 	render() {
 		return (
 			<tr>
@@ -15,6 +15,6 @@ export default class ShoppingHistory extends Component {
 		);
 	}
 }
-ShoppingHistory.propTypes = {
+PurchaseUser.propTypes = {
     purchase: PropTypes.object.isRequired,
 };
