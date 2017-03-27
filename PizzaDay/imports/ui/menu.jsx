@@ -21,7 +21,7 @@ class Menu extends Component {
                     <Navbar.Collapse>
                         <Nav>
                             <NavItem eventKey={1}><Link to="/">Main</Link></NavItem>
-                            <NavItem eventKey={2}><Link to="/myEvents">My Event</Link></NavItem>
+                            {this.props.currentUser ? <NavItem eventKey={2}><Link to="/usersShoppingStory">Shopping story</Link></NavItem> : ''}
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown eventKey={3} title={this.props.currentUser ? Meteor.user().username : "Login/Registr"} id="basic-nav-dropdown">

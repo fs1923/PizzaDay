@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+ import React, { Component, PropTypes } from 'react';
 import { FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import { Groups } from '../api/groups.js';
 import { createContainer } from 'meteor/react-meteor-data';

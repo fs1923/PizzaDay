@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 
-export default class ShoppingHistory extends Component {
-    renderItemName(){
+export default class PurchaseUser extends Component {
+	renderItemName(){
         return this.props.purchase.items.map((item) => (
             <span key={item.name}>{item.name}<br/></span>
         ));
@@ -18,18 +18,18 @@ export default class ShoppingHistory extends Component {
         ));
     };
 	render() {
-		return (  
+		return (
 			<tr>
                 <td>1</td>
                 <td>{Meteor.users.findOne({_id:this.props.purchase.userId}).username }</td>
                 <td>{this.renderItemName()}</td>
                 <td>{this.renderItemQuantity()}</td>
-                <td>{this.renderItemPrice()}</td>
+                <td>{this.renderItemPrice()} </td>
                 <td>{this.props.purchase.priceSum} $</td>
             </tr>
 		);
 	}
 }
-ShoppingHistory.propTypes = {
+PurchaseUser.propTypes = {
     purchase: PropTypes.object.isRequired,
 };
