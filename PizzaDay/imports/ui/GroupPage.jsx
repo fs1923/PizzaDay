@@ -75,11 +75,12 @@ class GroupPage extends Component {
                         <Navbar.Collapse>
                         {(this.props.groupPage.mainUser === Meteor.userId()) ?
                             <Nav pullRight className="right-menu">
-                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/request`}>request && members</Link></NavItem>
+                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/request`}>Request && Members</Link></NavItem>
+                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/insertCoupon`}>Add Coupon</Link></NavItem>
                                 <NavDropdown eventKey={2} title="Options group" id="basic-nav-dropdown">
-                                    <MenuItem eventKey={2.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>edit</Link></MenuItem>
+                                    <MenuItem eventKey={2.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>Edit Group</Link></MenuItem>
                                     <MenuItem divider />
-                                    <MenuItem onClick={this.deleteThisGroup.bind(this)} eventKey={2.2} >remove group</MenuItem>
+                                    <MenuItem onClick={this.deleteThisGroup.bind(this)} eventKey={2.2} >Remove Group</MenuItem>
                                 </NavDropdown>
                             </Nav>
                             :
