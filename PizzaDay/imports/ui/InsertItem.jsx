@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
+import { FormGroup, FormControl, Button, ControlLabel, InputGroup } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import Items from '../api/items'
@@ -32,13 +32,17 @@ export default class InsertItem extends Component {
                             />
                         </FormGroup>
                         <FormGroup className="relative" bsSize="large">
-                            <ControlLabel className="label-form-insert" >Prise:</ControlLabel>
-                            <FormControl className="inputName"
-                                         type="text"
-                                         name="prise"
-                                         ref="priseInput"
-                                         pattern="\d+(\.\d{2})?"
-                            />
+
+                            <InputGroup>
+                                <ControlLabel className="label-form-insert" >Prise:</ControlLabel>
+                                <FormControl className="inputName"
+                                             type="text"
+                                             name="prise"
+                                             ref="priseInput"
+                                             pattern="\d+(\.\d{2})?"
+                                />
+                                <InputGroup.Addon>$</InputGroup.Addon>
+                            </InputGroup>
                         </FormGroup>
                         <Button type="submit"
                                 className="formButton"
