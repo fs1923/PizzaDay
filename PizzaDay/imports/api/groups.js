@@ -94,13 +94,5 @@ Meteor.methods({
             Shopping.insert(shopping);
         }
     },
-    'Remove.Shopping'(){
-        Shopping.remove({});
-    },
-    'Remove.userShopping'(userId){
-        if (this.userId){
-            Shopping.remove({userId: userId});
-        }
-    }
 });
 

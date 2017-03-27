@@ -12,12 +12,6 @@ class usersShoppingStory extends Component {
 			<PurchaseUser key={purchase._id} purchase={purchase} />
 		));
 	};
-	removeShoppingUser() {
-		const beforRemove = confirm('Are you sure?');
-		if (beforRemove){
-			Meteor.call('Remove.userShopping', Meteor.userId());
-		}
-	};
 	render() {
 		if (this.props.loading){
 			return <Spinner/>;
@@ -38,14 +32,6 @@ class usersShoppingStory extends Component {
                		</thead>
                 	<tbody>
                     	{this.renderUsersShoppingStory()}
-                    	<tr>
-                        	<td></td>
-                        	<td></td>
-                        	<td></td>
-                        	<td></td>
-                        	<td></td>
-                        	<td><button onClick={this.removeShoppingUser.bind(this)} className="delete">Remove history</button></td>
-                    	</tr>
                 	</tbody>
             	</Table>
             	: <span><h1>History is empty</h1></span>

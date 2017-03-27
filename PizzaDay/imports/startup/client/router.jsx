@@ -10,6 +10,7 @@ import Menu from '../../ui/menu.jsx';
 import InsertItem from '../../ui/InsertItem.jsx';
 import updateItem from '../../ui/updateItem.jsx';
 import usersShoppingStory from '../../ui/usersShoppingStory.jsx';
+import ShoppingGroupsStory from '../../ui/ShoppingGroupsStory.jsx';
 
 const Layout =  (props)=>{
     return (
@@ -41,6 +42,7 @@ Meteor.startup(()=>
                 <Route path="group/:groupId/request" component={requestUser}/>
                 <Route path="group/:itemId/updateItem" component={updateItem}/>
                 <Route path="usersShoppingStory" component={usersShoppingStory}/>
+                <Route path="group/:groupId/shoppingGroupsStory" component={ShoppingGroupsStory}/>
                 <Route path="*" component={NotFound}/>
             </Route>
 
