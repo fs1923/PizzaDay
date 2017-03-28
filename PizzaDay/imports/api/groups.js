@@ -5,6 +5,7 @@ import { UserList } from './userList.js';
 import { Cart } from './cart.js';
 import { Shopping } from './shopping.js';
 import { Coupons} from './coupons';
+
 export const Groups = new Mongo.Collection('Groups');
 
 if (Meteor.isServer) {
@@ -96,6 +97,9 @@ Meteor.methods({
     },
     'Coupons.insert'(Insert) {
         Coupons.insert(Insert);
+    },
+    'Coupons.delete'(Insert) {
+        Coupons.delete(Insert);
     },
 });
 

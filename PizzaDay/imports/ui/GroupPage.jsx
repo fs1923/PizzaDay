@@ -11,6 +11,7 @@ import Item from '../ui/Item.jsx';
 import { Cart } from '../api/cart.js';
 import RenderCart from './RenderCart';
 import { UserList } from '../api/userList.js';
+import { Coupons } from '../api/coupons'
 
 
 class GroupPage extends Component {
@@ -27,9 +28,13 @@ class GroupPage extends Component {
     sum(){
         s = 0;
         this.props.cart.forEach(function(cart, i, arr) {
-            s+=cart.Quantity*Items.findOne({_id:cart.ItemId}).prise;
+            const prise = Items.findOne({_id:cart.ItemId}).prise;
+            const coupon = Coupons.findOne({item:cart.ItemId});
+            s+=coupon ?
+                cart.Quantity*prise-prise*Math.floor(cart.Quantity/coupon.quantity)*(coupon.persent/100)
+                :cart.Quantity*Items.findOne({_id:cart.ItemId}).prise;
         });
-        return s;
+        return s.toFixed(2);
     };
     deleteThisGroup() {
         let beforDeleteGroups = confirm('Are you sure?');
@@ -152,8 +157,9 @@ export default createContainer(({params}) => {
     const itemSubs = Meteor.subscribe('items');
     const cartSubs = Meteor.subscribe('cart');
     const userListSubs = Meteor.subscribe('userList');
+    const couponsSubs = Meteor.subscribe('coupons');
     return {
-        loading: !groupsSubs.ready() && !userSubs.ready() && !itemSubs.ready() && !cartSubs.ready() && !userListSubs.ready(),
+        loading: !couponsSubs.ready()&& !groupsSubs.ready() && !userSubs.ready() && !itemSubs.ready() && !cartSubs.ready() && !userListSubs.ready(),
         groupPage: Groups.findOne({_id:params.groupId}),
         items: Items.find({group:params.groupId}).fetch(),
         cart: Cart.find({UserId:Meteor.userId(),GroupId:params.groupId}).fetch(),
