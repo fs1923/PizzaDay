@@ -22,19 +22,6 @@ export default class Request extends Component{
             Meteor.call('UserList.update', tempRequest );
         };
     };
-/*    joinTheGroup(){
-        userListInsert = {UserId: this.props.currentUser._id, groupId: this.props.group._id}
-        Meteor.call( 'UserList.insert', userListInsert );
-    };
-    renderLinkName(){
-        return <Link to={`/group/${this.props.group._id}`}>{this.props.group.name}</Link>
-    };
-    deleteRequest() {
-        let beforDeleteRequest = confirm('Are you sure?');
-        if ( beforDeleteRequest === true ) {
-            Meteor.call('UserList.remove', this.props.userList._id);
-        }
-    };*/
     render(){
         return (
 

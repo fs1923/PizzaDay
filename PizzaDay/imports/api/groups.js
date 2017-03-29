@@ -98,8 +98,8 @@ Meteor.methods({
     'Coupons.insert'(Insert) {
         Coupons.insert(Insert);
     },
-    'Coupons.delete'(Insert) {
-        Coupons.delete(Insert);
+    'Coupons.remove'(Insert) {
+        Coupons.remove(Insert);
     },
 });
 

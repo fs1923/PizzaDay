@@ -11,6 +11,7 @@ import InsertItem from '../../ui/InsertItem.jsx';
 import updateItem from '../../ui/updateItem.jsx';
 import InsertCoupons from '../../ui/InsertCoupons';
 import usersShoppingStory from '../../ui/usersShoppingStory.jsx';
+import CouponsPage from '../../ui/CouponsPage'
 import ShoppingGroupsStory from '../../ui/ShoppingGroupsStory.jsx';
 
 const Layout =  (props)=>{
@@ -40,6 +41,7 @@ Meteor.startup(()=>
                 <Route path="/group/:groupId" component={GroupPage}/>
                 <Route path="/group/:groupId/insertItem" component={InsertItem}/>
                 <Route path="/group/:groupId/insertCoupon" component={InsertCoupons}/>
+                <Route path="/group/:groupId/Coupons" component={CouponsPage}/>
                 <Route path="updateGroup/:groupId" component={updateGroup}/>
                 <Route path="group/:groupId/request" component={requestUser}/>
                 <Route path="group/:itemId/updateItem" component={updateItem}/>

@@ -29,7 +29,17 @@ class GroupPage extends Component {
         s = 0;
         this.props.cart.forEach(function(cart, i, arr) {
             const prise = Items.findOne({_id:cart.ItemId}).prise;
-            const coupon = Coupons.findOne({item:cart.ItemId});
+            let d = new Date();
+            let weekday = new Array(7);
+            weekday[0] =  "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            let n = weekday[d.getDay()];
+            const coupon = Coupons.findOne({item:cart.ItemId, day:n});
             s+=coupon ?
                 cart.Quantity*prise-prise*Math.floor(cart.Quantity/coupon.quantity)*(coupon.persent/100)
                 :cart.Quantity*Items.findOne({_id:cart.ItemId}).prise;
@@ -82,7 +92,7 @@ class GroupPage extends Component {
                             <Nav pullRight className="right-menu">
                                 <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/request`}>Request && Members</Link></NavItem>
                                 <NavItem eventKey={2}><Link to={`/group/${this.props.params.groupId}/shoppingGroupsStory`}>Shopping Story</Link></NavItem>
-                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/insertCoupon`}>Add Coupon</Link></NavItem>
+                                <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/Coupons`}>Coupons</Link></NavItem>
                                 <NavDropdown eventKey={3} title="Options group" id="basic-nav-dropdown">
                                     <MenuItem eventKey={3.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>Edit Group</Link></MenuItem>
                                     <MenuItem divider />

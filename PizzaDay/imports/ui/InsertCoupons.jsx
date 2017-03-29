@@ -18,7 +18,7 @@ class InsertCoupons extends Component {
             if (error)
                 $.notify(error.reason, {type: "danger" });
             else
-                browserHistory.push('/');
+                browserHistory.push('/group/' + this.props.params.groupId + '/Coupons');
         });
     }
     renderCart(){
@@ -49,7 +49,7 @@ class InsertCoupons extends Component {
                         <Row>
                             <Col md={8}>
                                 <h1>How much to buy?</h1>
-                                <input type="number" name="quantity" min="1" max="100" ref="quantity"/>
+                                <input type="number" name="quantity" min="2" max="100" ref="quantity"/>
                             </Col>
                         </Row>
                         <Row>
