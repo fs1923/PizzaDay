@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Groups } from '../../api/groups.js';
 import { Items } from '../../api/items.js';
 import { createContainer } from 'meteor/react-meteor-data';
-import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table, Row, Thumbnail, Grid, Navbar, Nav, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
+import { Image, PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table, Row, Thumbnail, Grid, Navbar, Nav, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import Spinner from '../Spinner';
 import { Link } from 'react-router';
@@ -83,7 +83,7 @@ class GroupPage extends Component {
                     <Navbar className="menu-under-image">
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <span>{this.props.groupPage.name}</span>
+                                <Col md={6}><Image responsive className="img-thumbnail logo-groups" src={this.props.groupPage.urlLogo} alt="Logo"/></Col><Col md={6}>{this.props.groupPage.name}</Col>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
