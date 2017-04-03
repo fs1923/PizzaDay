@@ -50,7 +50,7 @@
     left: 15px;
     top: 7px;
     color: #333;
-    z-index: 2;
+    z-index: 10;
 }
 .right-menu{
     float: right;
@@ -215,4 +215,22 @@ body{
 }
 .dropdown-menu{
     border-radius: 0;
+}
+.upload-area .alert {
+  position: relative;
+  border-radius: 0px;
+}
+
+.upload-area input[type="file"] {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.logo-groups{
+    margin-top: -100px;
 }
