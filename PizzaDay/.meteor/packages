@@ -24,3 +24,5 @@ std:accounts-bootstrap
 fortawesome:fontawesome
 accounts-password@1.3.4
 mouse0270:bootstrap-notify
+edgee:slingshot
+peerlibrary:aws-sdk
