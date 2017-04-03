@@ -3,9 +3,12 @@ import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import '../startup/accounts-config.jsx';
 import { Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
-
+import GoogleLogin from 'react-google-login';
 
 class Menu extends Component {
+responseGoogle(response){
+  console.log(response);
+}
     render() {
 
 
@@ -25,7 +28,15 @@ class Menu extends Component {
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown eventKey={3} title={this.props.currentUser ? Meteor.user().username : "Login/Registr"} id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1} header ><Accounts.ui.LoginForm /></MenuItem>
+                                <MenuItem eventKey={3.1} header ><Accounts.ui.LoginForm />
+
+                                    <GoogleLogin
+                                        clientId={Meteor.userId()}
+                                        buttonText="Login"
+                                        onSuccess={this.responseGoogle()}
+                                        onFailure={this.responseGoogle()}
+                                    />
+                                </MenuItem>
                             </NavDropdown>
 
                         </Nav>

@@ -15,6 +15,12 @@ if (Meteor.isServer) {
     Meteor.publish('users', function usersPublication() {
         return Meteor.users.find({},{fields:{'username':1, 'emails':1}});
     });
+    S3.config = {
+        key:'AKIAISAEDKPWSPVEYKUQ',
+        secret:'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',
+        bucket:'wally-facility-images',
+        region: 'us-west-2'
+    };
 }
 
 Meteor.methods({
