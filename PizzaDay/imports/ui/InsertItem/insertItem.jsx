@@ -9,12 +9,26 @@ export default class InsertItem extends Component {
         event.preventDefault();
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
         const prise = ReactDOM.findDOMNode(this.refs.priseInput).value.trim();
-        itemInstert = {name: name, prise: prise, group: this.props.params.groupId}
-        Meteor.call('Items.insert', itemInstert, (error, result) => {
-            if (error)
+        let files = $("input.file_bag")[0].files;
+        var uploader = new Slingshot.Upload("myFileUploads");
+        const path = '/group/' + this.props.params.groupId;
+        const group = this.props.params.groupId;
+        uploader.send(files[0], function (error, downloadUrl) {
+            if (error) {
+                // Log service detailed response
                 $.notify(error.reason, {type: "danger" });
-            else
-                browserHistory.push('/group/' + this.props.params.groupId);
+                // alert (error);
+            }
+            else {
+                const url = downloadUrl;
+                itemInstert = {name: name, prise: prise, group: group, url:url}
+                Meteor.call('Items.insert', itemInstert, (error, result) => {
+                    if (error)
+                        $.notify(error.reason, {type: "danger" });
+                    else
+                        browserHistory.push(path);
+                });
+            }
         });
     }
     render() {
@@ -32,7 +46,6 @@ export default class InsertItem extends Component {
                             />
                         </FormGroup>
                         <FormGroup className="relative" bsSize="large">
-
                             <InputGroup>
                                 <ControlLabel className="label-form-insert" >Prise:</ControlLabel>
                                 <FormControl className="inputName"
@@ -43,6 +56,13 @@ export default class InsertItem extends Component {
                                 />
                                 <InputGroup.Addon>$</InputGroup.Addon>
                             </InputGroup>
+                        </FormGroup>
+                        <FormGroup className="relative" bsSize="large">
+                            <ControlLabel>Image:</ControlLabel>
+                            <p>
+                                Click or Drag a File Here to Upload
+                                <input type="file" className="file_bag"/>
+                            </p>
                         </FormGroup>
                         <Button type="submit"
                                 className="formButton"

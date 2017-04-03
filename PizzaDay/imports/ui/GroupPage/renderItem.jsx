@@ -23,7 +23,7 @@ export default class Item extends Component{
         return (
         
                     <Col sm={8} md={4}>
-                        <Thumbnail src="http://images.pizza33.ua/products_for_catalog/3EZkOPCasO7GXwmQ5z8H8eZTPR7HoDKZ.jpg" alt="242x200" className="relative">
+                        <Thumbnail src={this.props.item.url} alt="242x200" className="relative">
                             <h3>{this.props.item.name}</h3>
                             <p>{this.props.item.prise} $</p>
                             
