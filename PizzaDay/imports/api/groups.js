@@ -15,12 +15,46 @@ if (Meteor.isServer) {
     Meteor.publish('users', function usersPublication() {
         return Meteor.users.find({},{fields:{'username':1, 'emails':1}});
     });
-    S3.config = {
-        key:'AKIAISAEDKPWSPVEYKUQ',
-        secret:'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',
-        bucket:'wally-facility-images',
-        region: 'us-west-2'
-    };
+
+    console.log('Configuring S3')
+    Slingshot.createDirective("myFileUploads", Slingshot.S3Storage.TempCredentials, {
+        bucket: "pizzaday-photos",
+
+        acl: "public-read",
+
+        temporaryCredentials: Meteor.wrapAsync(function(expire, callback) {
+            var duration = Math.max(Math.round(expire / 1000), 900);
+
+            STS.getSessionToken({
+                DurationSeconds: duration,
+            }, function(error, result) {
+                callback(error, result && result.Credentials);
+            });
+        }),
+
+        authorize: function () {
+            // //Deny uploads if user is not logged in.
+            // if (!this.userId) {
+            //     var message = "Please login before posting files";
+            //     throw new Meteor.Error("Login Required", message);
+            // }
+
+            return true;
+        },
+
+        key: function (file) {
+            //Store file into a directory by the user's username.
+            // var user = Meteor.users.findOne(this.userId);
+            // return user.username + "/" + file.name;
+            return file.name;
+        }
+    });
+    // S3.config = {
+    //     key:'AKIAISAEDKPWSPVEYKUQ',
+    //     secret:'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',
+    //     bucket:'wally-facility-images',
+    //     region: 'us-west-2'
+    // };
 }
 
 Meteor.methods({
