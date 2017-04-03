@@ -1,28 +1,25 @@
- import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
-import { Groups } from '../api/groups.js';
+import { Items } from '../../api/items.js';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
-import Spinner from './Spinner'
+import Spinner from '../Spinner'
 
-
-class updateGroups extends Component {
-    updateGroup(event) {
+class updateItem extends Component {
+    updateItem(event) {
         event.preventDefault();
-
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
-        const url = ReactDOM.findDOMNode(this.refs.imageInput).value.trim();
-        groupUpdate = this.props.group;
-        groupUpdate.name = name;
-        groupUpdate.url = url;
-        Meteor.call('Groups.update', groupUpdate, (error, result) => {
-            if (error) {
+        const prise = ReactDOM.findDOMNode(this.refs.priceInput).value.trim();
+        let itemUpdate = this.props.item;
+        itemUpdate.name = name;
+        itemUpdate.prise = prise;
+        Meteor.call('Item.update', itemUpdate, (error, result) => {
+            if (error)
                 $.notify(error.reason, {type: "danger" });
-            }
             else
-                browserHistory.push('/');
+                browserHistory.push('/group/'+this.props.item.group);
         });
     }
     render() {
@@ -39,21 +36,21 @@ class updateGroups extends Component {
                             <FormControl className="inputName"
                                          type="text"
                                          ref="nameInput"
-                                         placeholder={this.props.group.name}
+                                         placeholder={this.props.item.name}
                             />
                         </FormGroup>
-                         <FormGroup className="relative" bsSize="large">
-                            <ControlLabel className="label-form-insert">Image:</ControlLabel>
+                        <FormGroup className="relative" bsSize="large">
+                            <ControlLabel className="label-form-insert">Prise:</ControlLabel>
                             <FormControl className="inputName"
                                          type="text"
-                                         ref="imageInput"
-                                         placeholder={this.props.group.url}
+                                         ref="priceInput"
+                                         pattern="\d+(\.\d{2})?"
+                                         placeholder={this.props.item.prise}
                             />
                         </FormGroup>
                         <Button type="submit"
                                 className="formButton"
-                                onClick={this.updateGroup.bind(this)}
-
+                                onClick={this.updateItem.bind(this)}
                         >
                             <b>Update</b>
                         </Button>
@@ -64,10 +61,9 @@ class updateGroups extends Component {
     }
 }
 export default createContainer(({params}) => {
-    const groupsSubs = Meteor.subscribe('groups');
-    Meteor.subscribe('users');
+    const itemsSubs = Meteor.subscribe('items');
     return {
-        loading: !groupsSubs.ready(),
-        group: Groups.findOne({_id:params.groupId}),
-    }
-},updateGroups)
+            loading: !itemsSubs.ready(),
+            item: Items.findOne({_id:params.itemId}),
+        }
+},updateItem)

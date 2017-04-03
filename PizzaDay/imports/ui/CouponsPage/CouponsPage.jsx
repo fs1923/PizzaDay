@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Groups } from '../api/groups.js';
 import { Meteor } from 'meteor/meteor';
-import { PanelGroup, Table } from 'react-bootstrap';
-import { Coupons } from '../api/coupons';
-import { Items } from '../api/items';
-import Spinner from './Spinner';
+import { Table } from 'react-bootstrap';
+import { Coupons } from '../../api/coupons';
+import Spinner from '../Spinner';
 import { Link } from 'react-router';
 import RenderCoupon from './RenderCoupon.jsx';
 

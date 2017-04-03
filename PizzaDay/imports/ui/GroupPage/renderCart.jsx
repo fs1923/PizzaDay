@@ -3,8 +3,8 @@ import { Panel, Button } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Items } from '../api/items.js';
-import { Coupons } from '../api/coupons'
+import { Items } from '../../api/items.js';
+import { Coupons } from '../../api/coupons'
 
 class RenderCart extends Component{
     deleteThisCart(){

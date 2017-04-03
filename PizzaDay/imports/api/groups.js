@@ -18,8 +18,8 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'Groups.remove'(groupId, userId) {
-        if (this.userId) {
+    'Groups.remove'(groupId) {
+        if (Meteor.userId() == Groups.findOne({_id: groupId}).mainUser) {
             Groups.remove({_id: groupId});
         }
 

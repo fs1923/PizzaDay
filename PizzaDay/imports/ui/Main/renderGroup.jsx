@@ -3,7 +3,7 @@ import { Panel, Button } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Link } from 'react-router';
-import { UserList } from '../api/userList.js';
+import { UserList } from '../../api/userList.js';
 
 class Group extends Component{
     deleteThisGroup() {

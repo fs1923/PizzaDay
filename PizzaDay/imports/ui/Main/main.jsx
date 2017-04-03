@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Groups } from '../api/groups.js';
+import { Groups } from '../../api/groups.js';
 import { Meteor } from 'meteor/meteor';
 import { PanelGroup } from 'react-bootstrap';
-import Group from './Group.jsx';
-import Spiner from './Spinner'
+import Group from './renderGroup.jsx';
+import Spiner from '../Spinner'
 import { Link } from 'react-router';
 
 

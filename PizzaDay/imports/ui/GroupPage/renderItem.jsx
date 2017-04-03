@@ -3,7 +3,7 @@ import { Panel, Button, Col, Thumbnail } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
-import { UserList } from '../api/userList.js';
+import { UserList } from '../../api/userList.js';
 
 export default class Item extends Component{
     addToCart(){

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Spinner from './Spinner.jsx';
-import  { Shopping } from '../api/shopping.js';
+import Spinner from '../../Spinner.jsx';
+import  { Shopping } from '../../../api/shopping.js';
 import ShoppingHistory from './shoppingHistory.jsx';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Table, Grid } from 'react-bootstrap';

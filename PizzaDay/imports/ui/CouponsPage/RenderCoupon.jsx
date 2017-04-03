@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Items } from '../api/items';
+import { Items } from '../../api/items';
 
 export default class RenderCoupon extends Component {
     removeThisCoupons() {

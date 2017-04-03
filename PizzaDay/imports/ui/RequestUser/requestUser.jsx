@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { UserList } from '../api/userList.js';
+import { UserList } from '../../api/userList.js';
 import { Meteor } from 'meteor/meteor';
 import { Table, Col, Tabs, Tab } from 'react-bootstrap';
-import Request from './Request.jsx';
-import Spinner from './Spinner';
+import Request from './renderRequest.jsx';
+import Spinner from '../Spinner';
 import { Link } from 'react-router';
-import MemberGroup from './MemberGroup.jsx';
+import MemberGroup from './renderMember.jsx';
 
 class RequestUser extends Component{
 

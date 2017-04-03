@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Groups } from '../api/groups.js';
-import { Items } from '../api/items.js';
+import { Groups } from '../../api/groups.js';
+import { Items } from '../../api/items.js';
 import { createContainer } from 'meteor/react-meteor-data';
 import { PanelGroup, FormGroup, FormControl, Button, ControlLabel, Col, Table, Row, Thumbnail, Grid, Navbar, Nav, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 import { Link } from 'react-router';
-import Item from '../ui/Item.jsx';
-import { Cart } from '../api/cart.js';
-import RenderCart from './RenderCart';
-import { UserList } from '../api/userList.js';
-import { Coupons } from '../api/coupons'
+import Item from './renderItem.jsx';
+import { Cart } from '../../api/cart.js';
+import RenderCart from './renderCart';
+import { UserList } from '../../api/userList.js';
+import { Coupons } from '../../api/coupons'
 
 
 class GroupPage extends Component {

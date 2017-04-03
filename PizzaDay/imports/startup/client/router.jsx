@@ -1,18 +1,18 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, Link, browserHistory, IndexRoute} from 'react-router';
-import Main from '../../ui/Main.jsx';
-import InsertGroup from '../../ui/InsertGroup.jsx';
-import updateGroup from '../../ui/updateGroups';
-import GroupPage from '../../ui/GroupPage.jsx';
-import requestUser from '../../ui/RequestUser.jsx';
+import Main from '../../ui/Main/main.jsx';
+import InsertGroup from '../../ui/Main/InsertGroup/InsertGroup.jsx';
+import updateGroup from '../../ui/UpdateGroup/updateGroup';
+import GroupPage from '../../ui/GroupPage/groupPage.jsx';
+import requestUser from '../../ui/RequestUser/requestUser.jsx';
 import Menu from '../../ui/menu.jsx';
-import InsertItem from '../../ui/InsertItem.jsx';
-import updateItem from '../../ui/updateItem.jsx';
-import InsertCoupons from '../../ui/InsertCoupons';
-import usersShoppingStory from '../../ui/usersShoppingStory.jsx';
-import CouponsPage from '../../ui/CouponsPage'
-import ShoppingGroupsStory from '../../ui/ShoppingGroupsStory.jsx';
+import InsertItem from '../../ui/InsertItem/insertItem.jsx';
+import updateItem from '../../ui/UpdateItem/updateItem.jsx';
+import InsertCoupon from '../../ui/InsertCoupon/insertCoupon';
+import usersShoppingStory from '../../ui/ShoppingStory/UserShoppingStory/usersShoppingStory.jsx';
+import CouponsPage from '../../ui/CouponsPage/CouponsPage'
+import ShoppingGroupsStory from '../../ui/ShoppingStory/GroupShoppingStory/groupShoppingStory.jsx';
 
 const Layout =  (props)=>{
     return (
@@ -40,7 +40,7 @@ Meteor.startup(()=>
                 <Route path="addGroup" component={InsertGroup}/>
                 <Route path="/group/:groupId" component={GroupPage}/>
                 <Route path="/group/:groupId/insertItem" component={InsertItem}/>
-                <Route path="/group/:groupId/insertCoupon" component={InsertCoupons}/>
+                <Route path="/group/:groupId/insertCoupon" component={InsertCoupon}/>
                 <Route path="/group/:groupId/Coupons" component={CouponsPage}/>
                 <Route path="updateGroup/:groupId" component={updateGroup}/>
                 <Route path="group/:groupId/request" component={requestUser}/>

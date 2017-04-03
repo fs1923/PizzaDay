@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, Button, ControlLabel, InputGroup } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
-import Items from '../api/items'
+import Items from '../../api/items'
 
 export default class InsertItem extends Component {
     insertItem(event) {

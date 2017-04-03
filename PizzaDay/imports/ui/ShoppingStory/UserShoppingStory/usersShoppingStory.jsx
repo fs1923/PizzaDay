@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from  'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Shopping } from '../api/shopping.js';
+import { Shopping } from '../../../api/shopping.js';
 import PurchaseUser from './purchaseUser.jsx';
 import { Table, Grid } from 'react-bootstrap';
-import Spinner from './Spinner.jsx';
+import Spinner from '../../Spinner.jsx';
 
 class usersShoppingStory extends Component {
 	renderUsersShoppingStory() {

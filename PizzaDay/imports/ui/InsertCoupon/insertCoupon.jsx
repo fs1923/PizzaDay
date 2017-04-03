@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Button, Checkbox, Row, Col } from 'react-bootst
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Items } from '../api/items.js';
+import { Items } from '../../api/items.js';
 
-class InsertCoupons extends Component {
+class InsertCoupon extends Component {
     insertCoupon(event) {
         event.preventDefault();
 
@@ -105,4 +105,4 @@ export default createContainer(({params}) => {
         loading: !itemSubs.ready(),
         items: Items.find({group:params.groupId}).fetch(),
     };
-},InsertCoupons)
+},InsertCoupon)
