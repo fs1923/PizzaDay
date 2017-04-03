@@ -60,7 +60,6 @@ export default class InsertItem extends Component {
                         <FormGroup className="relative" bsSize="large">
                             <ControlLabel>Image:</ControlLabel>
                             <p>
-                                Click or Drag a File Here to Upload
                                 <input type="file" className="file_bag"/>
                             </p>
                         </FormGroup>

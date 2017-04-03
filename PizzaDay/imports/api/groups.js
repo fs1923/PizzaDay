@@ -64,7 +64,7 @@ Meteor.methods({
         }
     },
     'Groups.update'(groupUpdate) {
-        if (this.userId) {
+        if (Meteor.userId() == Groups.findOne({_id: groupId}).mainUser) {
             if (groupUpdate.name.length<3)
                 throw new Meteor.Error(500, 'Error: The name must consist of more than three characters', 'The name must consist of more than three characters');
             Groups.update({_id:groupUpdate._id},groupUpdate);

@@ -22,12 +22,12 @@ class usersShoppingStory extends Component {
 				<Table responsive>
                 	<thead>
                     	<tr>
-                        	<th>#</th>
                         	<th>Username</th>
                         	<th>Item name</th>
                         	<th>Quantity item</th>
                         	<th>Price item</th>
                         	<th>Purchase amount</th>
+							<th>Date</th>
                     	</tr>
                		</thead>
                 	<tbody>

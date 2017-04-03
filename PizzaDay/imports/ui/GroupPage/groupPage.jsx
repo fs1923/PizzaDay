@@ -61,7 +61,7 @@ class GroupPage extends Component {
     byCart(){
         let beforBuyItem = confirm(`You buy on sum:` + this.sum()+"$");
         if ( beforBuyItem ) {
-            let shopping = { items: [], userId: Meteor.userId(), groupId: this.props.params.groupId, priceSum: this.sum()} ;
+            let shopping = { items: [], userId: Meteor.userId(), groupId: this.props.params.groupId, priceSum: this.sum(), Date: new Date()} ;
             this.props.cart.forEach(function(cart, i, arr) {
                 shopping.items.push({ name: Items.findOne({_id:cart.ItemId}).name, quantity: cart.Quantity, price: Items.findOne({_id:cart.ItemId}).prise });
             });
@@ -83,7 +83,7 @@ class GroupPage extends Component {
                     <Navbar className="menu-under-image">
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Col md={6}><Image responsive className="img-thumbnail logo-groups" src={this.props.groupPage.urlLogo} alt="Logo"/></Col><Col md={6}>{this.props.groupPage.name}</Col>
+                                <Col md={6}><img width="150px" height="150px" className="img-thumbnail logo-groups" src={this.props.groupPage.urlLogo} alt="Logo"/></Col><Col md={6}>{this.props.groupPage.name}</Col>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
@@ -94,7 +94,7 @@ class GroupPage extends Component {
                                 <NavItem eventKey={2}><Link to={`/group/${this.props.params.groupId}/shoppingGroupsStory`}>Shopping Story</Link></NavItem>
                                 <NavItem eventKey={1}><Link to={`/group/${this.props.params.groupId}/Coupons`}>Coupons</Link></NavItem>
                                 <NavDropdown eventKey={3} title="Options group" id="basic-nav-dropdown">
-                                    <MenuItem eventKey={3.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>Edit Group</Link></MenuItem>
+                                    <MenuItem eventKey={3.1} ><Link to={`/updateGroup/${this.props.params.groupId}`}>Edit Name</Link></MenuItem>
                                     <MenuItem divider />
                                     <MenuItem onClick={this.deleteThisGroup.bind(this)} eventKey={3.2} >Remove Group</MenuItem>
                                 </NavDropdown>

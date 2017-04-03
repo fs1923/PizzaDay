@@ -20,12 +20,12 @@ export default class PurchaseUser extends Component {
 	render() {
 		return (
 			<tr>
-                <td>1</td>
                 <td>{Meteor.users.findOne({_id:this.props.purchase.userId}).username }</td>
                 <td>{this.renderItemName()}</td>
                 <td>{this.renderItemQuantity()}</td>
                 <td>{this.renderItemPrice()} </td>
                 <td>{this.props.purchase.priceSum} $</td>
+                <td>{this.props.purchase.Date.toString()} </td>
             </tr>
 		);
 	}

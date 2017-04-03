@@ -6,7 +6,6 @@ export default class RenderCoupon extends Component {
     removeThisCoupons() {
         const beforRemove = confirm('Are you sure?');
         if (beforRemove) {
-            console.log(this.props.coupon);
             Meteor.call('Coupons.remove', this.props.coupon);
         };
     };

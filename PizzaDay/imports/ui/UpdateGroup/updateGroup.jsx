@@ -13,10 +13,8 @@ class updateGroups extends Component {
         event.preventDefault();
 
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
-        const url = ReactDOM.findDOMNode(this.refs.imageInput).value.trim();
-        groupUpdate = this.props.group;
+        let groupUpdate = this.props.group;
         groupUpdate.name = name;
-        groupUpdate.url = url;
         Meteor.call('Groups.update', groupUpdate, (error, result) => {
             if (error) {
                 $.notify(error.reason, {type: "danger" });
@@ -42,18 +40,9 @@ class updateGroups extends Component {
                                          placeholder={this.props.group.name}
                             />
                         </FormGroup>
-                         <FormGroup className="relative" bsSize="large">
-                            <ControlLabel className="label-form-insert">Image:</ControlLabel>
-                            <FormControl className="inputName"
-                                         type="text"
-                                         ref="imageInput"
-                                         placeholder={this.props.group.url}
-                            />
-                        </FormGroup>
                         <Button type="submit"
                                 className="formButton"
                                 onClick={this.updateGroup.bind(this)}
-
                         >
                             <b>Update</b>
                         </Button>
