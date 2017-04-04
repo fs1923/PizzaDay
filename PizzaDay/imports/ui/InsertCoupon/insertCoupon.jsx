@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, Button, Checkbox, Row, Col } from 'react-bootstrap';
+import { FormGroup, FormControl, Button, Checkbox, Row, Col, ControlLabel, Grid } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -28,65 +28,38 @@ class InsertCoupon extends Component {
     };
     render() {
         return (
-            <div className="container">
+            <Grid>
                 <h1>Add Coupon</h1>
-                <div className="col-md-5">
-                    <form onSubmit={this.insertCoupon.bind(this)}>
-                        <h1>Item</h1>
-                        <FormControl componentClass="select" placeholder="select" ref="item">
-                            {this.renderCart()}
-                        </FormControl>
-                        <h1>Day</h1>
-                        <FormControl componentClass="select" placeholder="select" ref="day">
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
-                            <option value="Sunday">Sunday</option>
-                        </FormControl>
-                        <Row>
-                            <Col md={8}>
-                                <h1>How much to buy?</h1>
-                                <input type="number" name="quantity" min="2" max="100" ref="quantity"/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={8}>
-                                <h1>How persent next this item</h1>
-                                <input type="number" name="quantity" min="1" max="100" ref="persent"/>
-                            </Col>
-                        </Row>
-                        {/*<FormGroup>*/}
-                            {/*<Checkbox ref="monday">*/}
-                                {/*Monday*/}
-                            {/*</Checkbox>*/}
-                            {/*{' '}*/}
-                            {/*<Checkbox ref="Tuesday">*/}
-                                {/*Tuesday*/}
-                            {/*</Checkbox>*/}
-                            {/*{' '}*/}
-                            {/*<Checkbox ref="Wednesday">*/}
-                                {/*Wednesday*/}
-                            {/*</Checkbox>*/}
-                            {/*{' '}*/}
-                            {/*<Checkbox inline ref="Thursday">*/}
-                                {/*Thursday*/}
-                            {/*</Checkbox>*/}
-                            {/*{' '}*/}
-                            {/*<Checkbox inline ref="Friday">*/}
-                                {/*Friday*/}
-                            {/*</Checkbox>*/}
-                            {/*{' '}*/}
-                            {/*<Checkbox inline ref="Saturday">*/}
-                                {/*Saturday*/}
-                            {/*</Checkbox>*/}
-                            {/*{' '}*/}
-                            {/*<Checkbox inline ref="Sunday">*/}
-                                {/*Sunday*/}
-                            {/*</Checkbox>*/}
-                        {/*</FormGroup>*/}
+                <Col md={6}>
+                    <form onSubmit={this.insertCoupon.bind(this)} className="insert-coupons">
+                        <FormGroup className="relative" bsSize="large">
+                            <ControlLabel className="label-form-insert">select Item:</ControlLabel>
+                            <FormControl  componentClass="select" className="inputName" placeholder="select" ref="item">
+                                {this.renderCart()}
+                            </FormControl>
+                        </FormGroup>
+                        <FormGroup className="relative" bsSize="large">
+                            <ControlLabel className="label-form-insert">select Day:</ControlLabel>
+                            <FormControl className="inputName" componentClass="select" placeholder="select" ref="day">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </FormControl>
+                        </FormGroup>
+                        <Row className="bottom-margin">
+                            <p className="input-number">
+                                <span className="text-over-number">How much to buy?</span>
+                                <input type="number" className="inputName right" name="quantity" min="2" max="100" ref="quantity"/>
+                            </p>
+                            <p className="input-number">
+                                <span className="text-over-number">Discount in persent</span>
+                                <input type="number" className="inputName right" name="quantity" min="1" max="100" ref="persent"/>
+                            </p>
+                         </Row>
                         <Button type="submit"
                                 className="formButton"
 
@@ -94,8 +67,8 @@ class InsertCoupon extends Component {
                             <b>Add</b>
                         </Button>
                     </form>
-                </div>
-            </div>
+                </Col>
+            </Grid>
         );
     }
 }

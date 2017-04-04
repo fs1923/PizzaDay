@@ -234,3 +234,20 @@ body{
 .logo-groups{
     margin-top: -100px;
 }
+.insert-coupons >.form-group-lg > .form-control{
+    padding-bottom: 0px;
+    padding-top: 30px;
+    height: 70px;
+}
+.right {
+    width: 150px;
+    height: 30px;
+    float: right;
+}
+.input-number{
+    font-size: 20px;
+    padding: 10px 17px 8px 17px;
+}
+.bottom-margin{
+    margin-bottom: 20px; 
+}
