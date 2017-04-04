@@ -64,43 +64,52 @@ Meteor.methods({
         }
     },
     'Groups.update'(groupUpdate) {
-        if (Meteor.userId() == Groups.findOne({_id: groupId}).mainUser) {
+        if (Meteor.userId() == Groups.findOne({_id: groupUpdate._id}).mainUser) {
             if (groupUpdate.name.length<3)
                 throw new Meteor.Error(500, 'Error: The name must consist of more than three characters', 'The name must consist of more than three characters');
             Groups.update({_id:groupUpdate._id},groupUpdate);
         }
     },
     'UserList.insert'(userListInsert) {
-        UserList.insert(userListInsert);
+        if (this.userId) {
+            UserList.insert(userListInsert);
+        }
     },
     'UserList.remove'(requestId){
-        UserList.remove({_id: requestId});
+        if (this.userId) {
+            UserList.remove({_id: requestId});
+        }
     },
     'UserList.update'(userListUpdate){
-        UserList.update({_id: userListUpdate._id},userListUpdate);
+        if (Meteor.userId() == Groups.findOne({_id: userListUpdate.groupId}).mainUser) {
+            UserList.update({_id: userListUpdate._id}, userListUpdate);
+        }
     },
     'Items.insert'(itemInsert) {
-        if (this.userId) {
+        if (Meteor.userId() == Groups.findOne({_id: itemInsert.group}).mainUser) {
             if (isNaN(itemInsert.prise) || itemInsert.prise=='')
                 throw new Meteor.Error(500, 'Error: Price is not a number', 'Price is not a number');
             if (itemInsert.name.length<3)
                 throw new Meteor.Error(500, 'Error: The name must consist of more than three characters', 'The name must consist of more than three characters');
-
             Items.insert(itemInsert);
         }
     },
     'Cart.insert'(cartInsert) {
-        tmpcart = Cart.findOne({UserId: cartInsert.UserId, GroupId: cartInsert.GroupId, ItemId:cartInsert.ItemId});
-        if (tmpcart) {
-            tmpcart.Quantity += 1;
-            Cart.update({_id: tmpcart._id},tmpcart);
-        }
-        else {
-            Cart.insert(cartInsert);
+        if(UserList.findOne({UserId: this.userId,status: "Follow"})) {
+            tmpcart = Cart.findOne({UserId: cartInsert.UserId, GroupId: cartInsert.GroupId, ItemId: cartInsert.ItemId});
+            if (tmpcart) {
+                tmpcart.Quantity += 1;
+                Cart.update({_id: tmpcart._id}, tmpcart);
+            }
+            else {
+                Cart.insert(cartInsert);
+            }
         }
     },
     'Cart.remove'(CartId){
-        Cart.remove({_id: CartId});
+        if(UserList.findOne({UserId: this.userId,status: "Follow"})) {
+            Cart.remove({_id: CartId});
+        }
     },
     'Item.remove'(itemId) {
         if (this.userId){
@@ -109,7 +118,7 @@ Meteor.methods({
         }
     },
     'Item.update'(itemUpdate) {
-        if (this.userId) {
+        if (Meteor.userId() == Groups.findOne({_id: itemUpdate.group}).mainUser) {
             if (isNaN(itemUpdate.prise) || itemUpdate.prise=='')
                 throw new Meteor.Error(500, 'Error: Price is not a number', 'Price is not a number');
             if (itemUpdate.name.length<3)
@@ -128,10 +137,14 @@ Meteor.methods({
         }
     },
     'Coupons.insert'(Insert) {
-        Coupons.insert(Insert);
+        if (Meteor.userId() == Groups.findOne({_id: Insert.groupId}).mainUser) {
+            Coupons.insert(Insert);
+        }
     },
     'Coupons.remove'(Insert) {
-        Coupons.remove(Insert);
+        if (Meteor.userId() == Groups.findOne({_id: Insert.groupId}).mainUser) {
+            Coupons.remove(Insert);
+        }
     },
 });
 

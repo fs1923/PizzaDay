@@ -76,7 +76,6 @@ Group.propTypes = {
     
 };
 export default createContainer((props) => {
-    Meteor.subscribe('userList');
     return {
         currentUser: Meteor.user(),
         userList:UserList.findOne({UserId: Meteor.userId(), groupId: props.group._id}),

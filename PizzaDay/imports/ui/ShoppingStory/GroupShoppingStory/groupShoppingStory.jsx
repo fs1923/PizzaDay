@@ -45,8 +45,9 @@ ShoppingGroupsStory.propTypes={
 export default createContainer(({params}) => {
     const userSubs = Meteor.subscribe('users');
     const shoppingSubs = Meteor.subscribe('shopping');
+    const groupSubs = Meteor.subscribe('groups');
     return {
-        loading: !userSubs.ready() && !shoppingSubs.ready(),
+        loading: !userSubs.ready() && !shoppingSubs.ready() && !groupSubs.ready(),
         shopping: Shopping.find({groupId: params.groupId}).fetch(),
     };
 }, ShoppingGroupsStory);

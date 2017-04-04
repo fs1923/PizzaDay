@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Items } from '../../api/items.js';
+import Spinner from '../Spinner';
 
 class InsertCoupon extends Component {
     insertCoupon(event) {
@@ -27,6 +28,9 @@ class InsertCoupon extends Component {
         ));
     };
     render() {
+        if (this.props.loading) {
+            return <Spinner/>;
+        }
         return (
             <Grid>
                 <h1>Add Coupon</h1>
@@ -74,8 +78,10 @@ class InsertCoupon extends Component {
 }
 export default createContainer(({params}) => {
     const itemSubs = Meteor.subscribe('items');
+    const groupSubs = Meteor.subscribe('groups');
+    const userSubs = Meteor.subscribe('users');
     return {
-        loading: !itemSubs.ready(),
+        loading: !itemSubs.ready() && !groupSubs.ready() && !userSubs.ready(),
         items: Items.find({group:params.groupId}).fetch(),
     };
 },InsertCoupon)

@@ -54,9 +54,9 @@ class updateGroups extends Component {
 }
 export default createContainer(({params}) => {
     const groupsSubs = Meteor.subscribe('groups');
-    Meteor.subscribe('users');
+    const userSubs = Meteor.subscribe('users');
     return {
-        loading: !groupsSubs.ready(),
+        loading: !groupsSubs.ready() && !userSubs.ready(),
         group: Groups.findOne({_id:params.groupId}),
     }
 },updateGroups)

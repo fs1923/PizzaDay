@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, Button, ControlLabel, InputGroup } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
-import Items from '../../api/items'
+import Items from '../../api/items';
+import { createContainer } from 'meteor/react-meteor-data';
+import Spinner from '../Spinner';
 
-export default class InsertItem extends Component {
+class InsertItem extends Component {
     insertItem(event) {
         event.preventDefault();
         const name = ReactDOM.findDOMNode(this.refs.nameInput).value.trim();
@@ -32,6 +34,9 @@ export default class InsertItem extends Component {
         });
     }
     render() {
+        if (this.props.loading) {
+            return <Spinner/>;
+        }
         return (
             <div className="container">
                 <h1>Add Item</h1>
@@ -75,3 +80,10 @@ export default class InsertItem extends Component {
         );
     }
 }
+export default createContainer(() => {
+    const groupSubs = Meteor.subscribe('groups');
+    const userSubs = Meteor.subscribe('users')
+    return {
+        loading: !groupSubs.ready() && !userSubs.ready(),
+    };
+},InsertItem )

@@ -36,8 +36,9 @@ Main.propTypes = {
 export default createContainer(() => {
     const groupsSubs = Meteor.subscribe('groups');
     const userSubs = Meteor.subscribe('users');
+    const userListSubs = Meteor.subscribe('userList');
     return {
-        loading: !groupsSubs.ready() && !userSubs.ready(),
+        loading: !groupsSubs.ready() && !userSubs.ready() && !userListSubs.ready(),
         groups: Groups.find({}).fetch(),
         currentUser: Meteor.user(),
     };

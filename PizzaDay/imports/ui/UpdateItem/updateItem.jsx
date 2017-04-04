@@ -5,7 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
-import Spinner from '../Spinner'
+import Spinner from '../Spinner';
 
 class updateItem extends Component {
     updateItem(event) {
@@ -62,8 +62,10 @@ class updateItem extends Component {
 }
 export default createContainer(({params}) => {
     const itemsSubs = Meteor.subscribe('items');
+    const groupSubs = Meteor.subscribe('groups');
+    const userSubs = Meteor.subscribe('users');
     return {
-            loading: !itemsSubs.ready(),
+            loading: !itemsSubs.ready() && !groupSubs.ready() && !userSubs.ready(),
             item: Items.findOne({_id:params.itemId}),
         }
 },updateItem)

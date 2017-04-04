@@ -72,9 +72,10 @@ export default createContainer(({params}) => {
     const requesSubs = Meteor.subscribe('userList');
     const userSubs = Meteor.subscribe('users');
     const shoppingSubs = Meteor.subscribe('shopping');
+    const groupSubs = Meteor.subscribe('groups');
 
     return {
-        loading: !requesSubs.ready() && !userSubs.ready() && !shoppingSubs.ready(),
+        loading: !requesSubs.ready() && !userSubs.ready() && !shoppingSubs.ready() && !groupSubs.ready(),
         userList: UserList.find({groupId: params.groupId, status: "Request"}).fetch(),
         membersGroups: UserList.find({groupId: params.groupId, status: "Follow"}).fetch(),
     };
