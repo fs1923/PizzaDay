@@ -44,13 +44,13 @@ class CouponsPage extends Component{
 CouponsPage.propTypes = {
     coupons: PropTypes.array.isRequired,
 };
-export default createContainer((params) => {
+export default createContainer(({params}) => {
     const groupSubs = Meteor.subscribe('groups');
     const couponsSubs = Meteor.subscribe('coupons');
     const itemSubs = Meteor.subscribe('items');
     const userSubs = Meteor.subscribe('users');
     return {
         loading: !couponsSubs.ready() && !userSubs.ready() && !itemSubs.ready() && !groupSubs.ready(),
-        coupons: Coupons.find({}).fetch(),
+        coupons: Coupons.find({groupId:params.groupId}).fetch(),
     };
 }, CouponsPage);

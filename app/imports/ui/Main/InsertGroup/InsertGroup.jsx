@@ -21,25 +21,26 @@ export default class InsertGroup extends Component {
             }
             else {
                 urlLogo=downloadUrlLogo;
-            }
-        });
-        uploader.send(files[0], function (error, downloadUrl) {
-            if (error) {
-                // Log service detailed response
-                $.notify(error.reason, {type: "danger" });
-                // alert (error);
-            }
-            else {
-                const url = downloadUrl;
-                groupInstert = {name:name,mainUser:Meteor.user()._id, url: url, urlLogo:urlLogo};
-                Meteor.call('Groups.insert', groupInstert , (error, result) => {
-                    if (error)
+                uploader.send(files[0], function (error, downloadUrl) {
+                    if (error) {
+                        // Log service detailed response
                         $.notify(error.reason, {type: "danger" });
-                    else
-                        browserHistory.push('/');
+                        // alert (error);
+                    }
+                    else {
+                        const url = downloadUrl;
+                        groupInstert = {name:name,mainUser:Meteor.user()._id, url: url, urlLogo:urlLogo};
+                        Meteor.call('Groups.insert', groupInstert , (error, result) => {
+                            if (error)
+                                $.notify(error.reason, {type: "danger" });
+                            else
+                                browserHistory.push('/');
+                        });
+                    }
                 });
             }
         });
+
 
     };
     render() {
