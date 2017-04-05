@@ -2,8 +2,8 @@ import { AWS } from 'meteor/peerlibrary:aws-sdk';
 
 
 AWS.config.update({
-    accessKeyId: 'AKIAIMOZADDZE3BZILQQ',
-    secretAccessKey: '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',
+    accessKeyId: 'AKIAJS3AUYXHOA7RHE5A',
+    secretAccessKey: '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',
 });
 
 STS = new AWS.STS();
